@@ -8,9 +8,11 @@ function App() {
 
   const [hasBeenWhite, setHasBeenWhite] = useState(false);
 
+  const changeAmount = 10;
+
   function cycleColor() {
     if (hue < 320) {
-      setHue(hue + 10);
+      setHue(hue + changeAmount);
       return;
     }
     if (lightness >= 100) {
@@ -18,10 +20,10 @@ function App() {
       setSaturation(0);
     }
     if (!hasBeenWhite) {
-      setLightness(lightness + 10);
+      setLightness(lightness + changeAmount);
       return;
     }
-    if (lightness > 0) setLightness(lightness - 10);
+    if (lightness > 0) setLightness(lightness - changeAmount);
   }
 
   return (
