@@ -11,3 +11,36 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
 }
+
+.App {
+  width: 100vw;
+  height: 100vh;
+  background-color: lightgrey;
+  display: grid;
+  place-items: center
+}
+
+.content {
+  width: 400px;
+  height: 400px;
+  background-color: white;
+  border-radius: 16px;
+  border: 2px solid grey;
+  box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+  display: flex;
+  flex-direction: column;
+}
+
+.color-circle-wrapper {
+  flex: 1;
+  display: grid;
+  place-items: center;
+}
+
+.color-circle {
+  border: 2px solid black;
+  align-items: center;
+  width: 75%;
+  padding-bottom: 75%;
+  border-radius: 100%;
+}
