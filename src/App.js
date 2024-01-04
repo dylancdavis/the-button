@@ -2,28 +2,52 @@ import { useState } from "react";
 import "./App.css";
 
 function App() {
-  const [hue, setHue] = useState(0);
-  const [saturation, setSaturation] = useState(100);
-  const [lightness, setLightness] = useState(50);
+  const [colorTicks, setColorTicks] = useState(0);
+  const maxTicks = 100;
 
-  const [hasBeenWhite, setHasBeenWhite] = useState(false);
+  function tickColor() {
+    if (colorTicks === maxTicks) return;
+    setColorTicks(colorTicks + 1);
+  }
 
-  const changeAmount = 10;
+  function tickProgress() {
+    return colorTicks / maxTicks;
+  }
 
-  function cycleColor() {
-    if (hue < 320) {
-      setHue(hue + changeAmount);
-      return;
+  function getColorProgress(unitInterval) {
+    if (unitInterval > 1 || unitInterval < 0) return;
+
+    const firstThreshold = 0.7;
+    const secondThreshold = 0.8;
+
+    if (unitInterval < firstThreshold) {
+      const scaledPercent = unitInterval / firstThreshold;
+      return {
+        hue: scaledPercent * 320,
+        saturation: 100,
+        lightness: 50,
+      };
     }
-    if (lightness >= 100) {
-      setHasBeenWhite(true);
-      setSaturation(0);
+    if (unitInterval < secondThreshold) {
+      const scaledPercent =
+        (unitInterval - firstThreshold) / (secondThreshold - firstThreshold);
+      return {
+        hue: 320,
+        saturation: 100,
+        lightness: 50 + scaledPercent * 50,
+      };
     }
-    if (!hasBeenWhite) {
-      setLightness(lightness + changeAmount);
-      return;
-    }
-    if (lightness > 0) setLightness(lightness - changeAmount);
+    const scaledPercent =
+      (unitInterval - secondThreshold) / (1 - secondThreshold);
+    return {
+      hue: 320,
+      saturation: 100,
+      lightness: 100 - scaledPercent * 100,
+    };
+  }
+
+  function toHslString({ hue, saturation, lightness }) {
+    return `hsl(${hue}, ${saturation}%, ${lightness}%)`;
   }
 
   return (
@@ -32,10 +56,10 @@ function App() {
         <h1>Color Circle</h1>
         <div className="color-circle-wrapper">
           <div
-            onClick={cycleColor}
+            onClick={tickColor}
             className="color-circle"
             style={{
-              backgroundColor: `hsl(${hue}, ${saturation}%, ${lightness}%)`,
+              backgroundColor: toHslString(getColorProgress(tickProgress())),
             }}
           ></div>
         </div>
