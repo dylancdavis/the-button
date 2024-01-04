@@ -2,14 +2,26 @@ import { useState } from "react";
 import "./App.css";
 
 function App() {
-  const [hue, setHue] = useState(320);
+  const [hue, setHue] = useState(0);
   const [saturation, setSaturation] = useState(100);
   const [lightness, setLightness] = useState(50);
 
-  function decreaseColor() {
-    if (hue > 0) {
-      setHue(hue - 1);
+  const [hasBeenWhite, setHasBeenWhite] = useState(false);
+
+  function cycleColor() {
+    if (hue < 320) {
+      setHue(hue + 10);
+      return;
     }
+    if (lightness >= 100) {
+      setHasBeenWhite(true);
+      setSaturation(0);
+    }
+    if (!hasBeenWhite) {
+      setLightness(lightness + 10);
+      return;
+    }
+    if (lightness > 0) setLightness(lightness - 10);
   }
 
   return (
@@ -18,6 +30,7 @@ function App() {
         <h1>Color Circle</h1>
         <div className="color-circle-wrapper">
           <div
+            onClick={cycleColor}
             className="color-circle"
             style={{
               backgroundColor: `hsl(${hue}, ${saturation}%, ${lightness}%)`,
