@@ -124,6 +124,8 @@ function App() {
               ),
             }}
           ></button>
+        </div>
+        <div className="input-wrapper">
           <input
             value={username}
             onChange={(e) => setUsername(e.target.value)}
