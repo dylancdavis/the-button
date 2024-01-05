@@ -86,8 +86,9 @@ function App() {
       body: JSON.stringify(bodyData)
     });
     const data = await response.json();
-    console.log("data:", data);
     setMostRecentClick(new Date(data.mostRecentClick));
+    setTotalClicks(data.totalClicks)
+    setUsers(data.users)
   }
 
   return (
@@ -106,6 +107,7 @@ function App() {
             }}
           ></div>
         </div>
+        <div>Total Clicks: {totalClicks}</div>
       </div>
     </div>
   );
