@@ -2,8 +2,8 @@ import { useEffect, useState } from "react";
 import "./App.css";
 import "./reset.css";
 
-const baseURL = "http://localhost:8080";
-const apiURL = `${baseURL}/api`;
+// const baseURL = "http://localhost:8080";
+const apiURL = `/api`;
 
 function App() {
   const buttonLifeSpan = 1000 * 60 * 60 * 24 * 7 * 2; // Two Weeks
