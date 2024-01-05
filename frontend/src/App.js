@@ -44,7 +44,7 @@ function App() {
         }
       }
     })();
-  }, []);
+  }, [userID]);
 
   function getButtonLifePercent() {
     const now = new Date();
