@@ -6,6 +6,18 @@ function App() {
 
   const [lastClickDate, setLastClickDate] = useState(new Date());
 
+  
+  function getUserID() {
+    let userID = window.localStorage.getItem('userID');
+    if (!userID) {
+      userID = crypto.randomUUID()
+      window.localStorage.setItem('userID', userID)
+    }
+    return userID
+  }
+  
+  const userID = getUserID()
+
   useEffect(() => {
     (async function fetchData() {
       const response = await fetch("http://localhost:8000/last-clicked");
