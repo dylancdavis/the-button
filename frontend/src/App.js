@@ -117,7 +117,6 @@ function App() {
             }}
           ></button>
         </div>
-        <div>Total Clicks: {totalClicks}</div>
       </div>
       {users && (
         <div className="scoreboard">
@@ -135,6 +134,7 @@ function App() {
               </li>
             ))}
           </ol>
+          <div className="click-counter">Total Clicks: {totalClicks}</div>
         </div>
       )}
     </div>
