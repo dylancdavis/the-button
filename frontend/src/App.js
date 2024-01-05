@@ -62,6 +62,15 @@ function App() {
     return `hsl(${hue}, ${saturation}%, ${lightness}%)`;
   }
 
+  async function updateClickDate() {
+    const response = await fetch("http://localhost:8000/last-clicked", {
+      method: "POST",
+    });
+    const data = await response.json();
+    console.log("data:", data);
+    setLastClickDate(data.lastClicked);
+  }
+
   return (
     <div className="App">
       <div className="content">
@@ -75,6 +84,7 @@ function App() {
             }}
           ></div>
         </div>
+        <button onClick={updateClickDate}>Update Click Data</button>
       </div>
     </div>
   );
