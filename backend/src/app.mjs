@@ -30,12 +30,22 @@ app.get("/last-clicked", (req, res) => {
 
 app.post("/click", (req, res) => {
   const db = new LowSync(new JSONFileSync("db.json"), {});
-  console.log('Request body:', req.body)
+  const bodyData = req.body
   db.read();
-  db.update((data) => {
-    data.totalClicks++;
-    data.mostRecentClick = new Date();
-  });
+  const users = db.data.users;
+  const user = users.find(({userID}) => userID === bodyData.userID )
+  if (user) {
+    // User already exists.
+    // Ignore if new score is less.
+    if (bodyData.score < user.score) return
+    user.score = bodyData.score
+  } else {
+    // Create new user
+    users.push(bodyData)
+  }
+  db.data.totalClicks++
+  db.data.mostRecentClick = new Date();
+  db.write();
   res.send(db.data);
 });
 

@@ -70,7 +70,7 @@ function App() {
   }
 
   async function sendClick() {
-    const bodyData = {userID: userID}
+    const bodyData = {userID: userID, score: getButtonLifePercent()}
     const response = await fetch("http://localhost:8000/click", {
       method: "POST",
       headers: {
