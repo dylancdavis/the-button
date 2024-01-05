@@ -25,6 +25,12 @@ app.get("/last-clicked", (req, res) => {
   res.send(db.data);
 });
 
+app.post("/last-clicked", (req, res) => {
+  const db = new LowSync(new JSONFileSync("db.json"), {});
+  db.update((data) => ({ ...data, lastClicked: new Date() }));
+  res.send(db.data);
+});
+
 app.listen(port, () => {
   console.log(`Example app listening on port ${port}`);
 });
