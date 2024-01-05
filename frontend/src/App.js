@@ -17,6 +17,7 @@ function App() {
   function getButtonLifePercent() {
     const now = new Date();
     const buttonAge = now - lastClickDate;
+    if (buttonAge > buttonLifeSpan) return 1;
     return buttonAge / buttonLifeSpan;
   }
 
