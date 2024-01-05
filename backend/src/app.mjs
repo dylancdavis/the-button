@@ -1,4 +1,5 @@
-const express = require("express");
+// const express = require("express");
+import express from "express";
 const app = express();
 const port = 8000;
 
@@ -9,7 +10,7 @@ app.get("/", (req, res) => {
   res.send("Hello World!");
 });
 
-app.get.get("/last-clicked-db", (req, res) => {
+app.get("/last-clicked-db", (req, res) => {
   const db = new LowSync(new JSONFileSync("db.json"));
   db.read();
   res.send(db.data);
