@@ -1,13 +1,7 @@
 {
   "isAlive": true,
   "startingTime": "2024-01-01",
-  "mostRecentClick": "2024-01-05T21:42:43.690Z",
-  "totalClicks": 1,
-  "users": [
-    {
-      "userID": "4d84089b-4df7-428a-9a21-4b63ce97bc6f",
-      "score": 0.3503337334656085,
-      "name": "Cole"
-    }
-  ]
+  "mostRecentClick": "2024-01-01",
+  "totalClicks":0,
+  "users": []
 }
