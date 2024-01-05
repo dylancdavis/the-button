@@ -2,6 +2,9 @@ import { useEffect, useState } from "react";
 import "./App.css";
 import "./reset.css";
 
+const baseURL = "http://localhost:8080";
+const apiURL = `${baseURL}/api`;
+
 function App() {
   const buttonLifeSpan = 1000 * 60 * 60 * 24 * 7 * 2; // Two Weeks
 
@@ -31,7 +34,7 @@ function App() {
 
   useEffect(() => {
     (async function fetchData() {
-      const response = await fetch("http://localhost:8000/api/data");
+      const response = await fetch(`${apiURL}/data`);
       const data = await response.json();
       setMostRecentClick(new Date(data.mostRecentClick));
       setTotalClicks(data.totalClicks);
@@ -112,7 +115,7 @@ function App() {
       score: getButtonLifePercent(),
       name: username,
     };
-    const response = await fetch("http://localhost:8000/api/click", {
+    const response = await fetch(`${apiURL}/click`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
