@@ -83,10 +83,16 @@ code {
   color: grey;
 }
 
+
+@media (min-width: 992px) {
+  .scoreboard {
+    position: absolute;
+    top: 1em;
+    left: 1em;
+  }
+}
+
 .scoreboard {
-  position: absolute;
-  top: 1em;
-  left: 1em;
   display: flex;
   flex-direction: column;
   gap: 0.5em;
