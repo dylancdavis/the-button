@@ -6,7 +6,9 @@ const port = 8000;
 import { LowSync } from "lowdb";
 import { JSONFileSync } from "lowdb/node";
 
-app.use(express.json())
+app.use(express.static("build"));
+
+app.use(express.json());
 
 app.use(function (req, res, next) {
   res.header("Access-Control-Allow-Origin", "*");
@@ -29,10 +31,10 @@ app.get("/data", (req, res) => {
 
 app.post("/click", (req, res) => {
   const db = new LowSync(new JSONFileSync("db.json"), {});
-  const bodyData = req.body
+  const bodyData = req.body;
   db.read();
   const users = db.data.users;
-  const user = users.find(({userID}) => userID === bodyData.userID )
+  const user = users.find(({ userID }) => userID === bodyData.userID);
   if (user) {
     // User already exists.
     // Ignore if new score is less.
@@ -40,12 +42,12 @@ app.post("/click", (req, res) => {
       res.send(db.data);
       return;
     }
-    user.score = bodyData.score
+    user.score = bodyData.score;
   } else {
     // Create new user
-    users.push(bodyData)
+    users.push(bodyData);
   }
-  db.data.totalClicks++
+  db.data.totalClicks++;
   db.data.mostRecentClick = new Date();
   db.write();
   res.send(db.data);
