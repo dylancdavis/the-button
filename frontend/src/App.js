@@ -13,7 +13,9 @@ function App() {
 
   const [lastClickDate, setLastClickDate] = useState(null);
 
-  useEffect(() => fetchData(), []);
+  useEffect(() => {
+    fetchData();
+  }, []);
 
   function tickColor() {
     if (colorTicks === maxTicks) return;
