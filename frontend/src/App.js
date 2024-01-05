@@ -31,7 +31,7 @@ function App() {
 
   useEffect(() => {
     (async function fetchData() {
-      const response = await fetch("http://localhost:8000/data");
+      const response = await fetch("http://localhost:8000/api/data");
       const data = await response.json();
       setMostRecentClick(new Date(data.mostRecentClick));
       setTotalClicks(data.totalClicks);
@@ -112,7 +112,7 @@ function App() {
       score: getButtonLifePercent(),
       name: username,
     };
-    const response = await fetch("http://localhost:8000/click", {
+    const response = await fetch("http://localhost:8000/api/click", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
