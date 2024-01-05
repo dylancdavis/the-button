@@ -17,7 +17,8 @@ code {
   height: 100vh;
   background-color: lightgrey;
   display: grid;
-  place-items: center
+  place-items: center;
+  font-family: 'Roboto'
 }
 
 .content {
