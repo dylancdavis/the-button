@@ -11,6 +11,8 @@ function App() {
 
   const [username, setUsername] = useState("");
 
+  const [newUser, setNewUser] = useState(true);
+
   function getUserID() {
     let userID = window.localStorage.getItem("userID");
     if (!userID) {
@@ -20,12 +22,12 @@ function App() {
     return userID;
   }
 
+  const userID = getUserID();
+
   function getScoreboardUsers() {
     const sorted = users.sort((a, b) => b.score - a.score);
     return sorted.slice(0, 10);
   }
-
-  const userID = getUserID();
 
   useEffect(() => {
     (async function fetchData() {
@@ -34,6 +36,13 @@ function App() {
       setMostRecentClick(new Date(data.mostRecentClick));
       setTotalClicks(data.totalClicks);
       setUsers(data.users);
+      if (data.users) {
+        const user = data.users.find((user) => user.userID === userID);
+        if (user) {
+          setUsername(user.name);
+          setNewUser(false);
+        }
+      }
     })();
   }, []);
 
@@ -131,11 +140,17 @@ function App() {
           ></button>
         </div>
         <div className="input-wrapper">
-          <input
-            value={username}
-            onChange={(e) => setUsername(e.target.value)}
-            placeholder="What's your name?"
-          ></input>
+          {newUser ? (
+            <input
+              value={username}
+              onChange={(e) => setUsername(e.target.value)}
+              placeholder="What's your name?"
+            ></input>
+          ) : (
+            <div class="button-message">
+              welcome back, {username.toLowerCase()}
+            </div>
+          )}
         </div>
       </div>
       {users && (

@@ -73,6 +73,11 @@ code {
   font-size: 18px;
 }
 
+.content .button-message {
+  font-style: italic;
+  color: grey;
+}
+
 .scoreboard {
   position: absolute;
   top: 1em;
