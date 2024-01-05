@@ -9,6 +9,8 @@ function App() {
   const [users, setUsers] = useState(null);
   const [totalClicks, setTotalClicks] = useState(null);
 
+  const [username, setUsername] = useState("");
+
   function getUserID() {
     let userID = window.localStorage.getItem("userID");
     if (!userID) {
@@ -122,6 +124,11 @@ function App() {
               ),
             }}
           ></button>
+          <input
+            value={username}
+            onChange={(e) => setUsername(e.target.value)}
+            placeholder="What's your name?"
+          ></input>
         </div>
       </div>
       {users && (

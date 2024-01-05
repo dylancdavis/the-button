@@ -59,6 +59,16 @@ code {
 .color-circle:active {
   box-shadow: rgba(0,0,0, 0.2) 0px 16px 16px inset
 }
+
+.content input {
+  background-color: rgba(17, 17, 17, 0.1);
+  color:#111;
+  padding: 0.5em;
+  border-radius: 1em;
+  border: 2px solid grey;
+  font-size: 18px;
+}
+
 .scoreboard {
   position: absolute;
   top: 1em;
