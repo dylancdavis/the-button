@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import "./App.css";
+import "./reset.css";
 
 function App() {
   const buttonLifeSpan = 1000 * 60 * 60 * 24 * 7 * 2; // Two Weeks
