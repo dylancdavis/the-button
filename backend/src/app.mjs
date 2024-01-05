@@ -29,7 +29,10 @@ app.get("/last-clicked", (req, res) => {
 app.post("/last-clicked", (req, res) => {
   const db = new LowSync(new JSONFileSync("db.json"), {});
   db.read();
-  db.update((data) => (data.mostRecentClick = new Date()));
+  db.update((data) => {
+    data.totalClicks++;
+    data.mostRecentClick = new Date();
+  });
   res.send(db.data);
 });
 
