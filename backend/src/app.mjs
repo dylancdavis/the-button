@@ -17,7 +17,7 @@ app.get("/last-clicked-db", (req, res) => {
 });
 
 app.get("/last-clicked", (req, res) => {
-  res.send(Date("2024-01-01"));
+  res.send(new Date("2024-01-01"));
 });
 
 app.listen(port, () => {
