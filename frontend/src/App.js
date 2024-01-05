@@ -69,7 +69,7 @@ function App() {
     return `hsl(${hue}, ${saturation}%, ${lightness}%)`;
   }
 
-  async function updateClickDate() {
+  async function sendClick() {
     const bodyData = {userID: userID}
     const response = await fetch("http://localhost:8000/click", {
       method: "POST",
@@ -89,7 +89,7 @@ function App() {
         <h1>The Button</h1>
         <div className="color-circle-wrapper">
           <div
-            onClick={updateClickDate}
+            onClick={sendClick}
             className="color-circle"
             style={{
               backgroundColor: toHslString(
