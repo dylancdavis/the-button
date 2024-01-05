@@ -48,7 +48,7 @@ function App() {
       (unitInterval - secondThreshold) / (1 - secondThreshold);
     return {
       hue: 320,
-      saturation: 100,
+      saturation: 0,
       lightness: 100 - scaledPercent * 100,
     };
   }
