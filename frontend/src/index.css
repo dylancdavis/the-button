@@ -33,6 +33,12 @@ code {
   flex-direction: column;
 }
 
+.content h1 {
+  font-size: 48px;
+  font-weight: bold;
+  padding: 0.25em;;
+}
+
 .color-circle-wrapper {
   flex: 1;
   display: grid;
@@ -72,9 +78,14 @@ code {
   box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
 }
 
-ol {
-  margin: 0px;
-  padding: 0px;
+.scoreboard h2 {
+  font-size: 24px;
+  font-weight: bold;
+}
+
+.scoreboard {
+  padding: 0.5em 1em;
+
 }
 
 .scoreboard li {

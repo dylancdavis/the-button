@@ -18,6 +18,11 @@ function App() {
     return userID;
   }
 
+  function getScoreboardUsers() {
+    const sorted = users.sort((a, b) => b.score - a.score);
+    return sorted.slice(0, 10);
+  }
+
   const userID = getUserID();
 
   useEffect(() => {
@@ -123,7 +128,7 @@ function App() {
         <div className="scoreboard">
           <h2>Scoreboard</h2>
           <ol>
-            {users.map((user) => (
+            {getScoreboardUsers().map((user) => (
               <li>
                 {user.userID},{" "}
                 <div
