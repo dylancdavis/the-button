@@ -1,9 +1,19 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import "./App.css";
+
+async function fetchData() {
+  const response = await fetch("http://localhost:8000");
+  const data = await response.json();
+  console.log("data:", data);
+}
 
 function App() {
   const [colorTicks, setColorTicks] = useState(0);
   const maxTicks = 100;
+
+  const [lastClickDate, setLastClickDate] = useState(null);
+
+  useEffect(() => fetchData(), []);
 
   function tickColor() {
     if (colorTicks === maxTicks) return;
