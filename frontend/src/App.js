@@ -62,7 +62,7 @@ function App() {
     });
     const data = await response.json();
     console.log("data:", data);
-    setLastClickDate(data.lastClicked);
+    setLastClickDate(new Date(data.mostRecentClick));
   }
 
   return (
