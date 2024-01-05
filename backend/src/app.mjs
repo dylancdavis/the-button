@@ -37,7 +37,10 @@ app.post("/click", (req, res) => {
   if (user) {
     // User already exists.
     // Ignore if new score is less.
-    if (bodyData.score < user.score) return
+    if (bodyData.score < user.score) {
+      res.send(db.data);
+      return;
+    }
     user.score = bodyData.score
   } else {
     // Create new user
