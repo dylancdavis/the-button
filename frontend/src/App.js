@@ -1,29 +1,23 @@
 import { useEffect, useState } from "react";
 import "./App.css";
 
-async function fetchData() {
-  const response = await fetch("http://localhost:8000/last-clicked");
-  const data = await response.json();
-  console.log("data:", data);
-}
-
 function App() {
-  const [colorTicks, setColorTicks] = useState(0);
-  const maxTicks = 100;
+  const buttonLifeSpan = 1000 * 60 * 60 * 24 * 7 * 2; // Two Weeks
 
-  const [lastClickDate, setLastClickDate] = useState(null);
+  const [lastClickDate, setLastClickDate] = useState(new Date());
 
   useEffect(() => {
-    fetchData();
+    (async function fetchData() {
+      const response = await fetch("http://localhost:8000/last-clicked");
+      const data = await response.json();
+      setLastClickDate(new Date(data));
+    })();
   }, []);
 
-  function tickColor() {
-    if (colorTicks === maxTicks) return;
-    setColorTicks(colorTicks + 1);
-  }
-
-  function tickProgress() {
-    return colorTicks / maxTicks;
+  function getButtonLifePercent() {
+    const now = new Date();
+    const buttonAge = now - lastClickDate;
+    return buttonAge / buttonLifeSpan;
   }
 
   function getColorProgress(unitInterval) {
@@ -77,14 +71,15 @@ function App() {
         <h1>The Button</h1>
         <div className="color-circle-wrapper">
           <div
-            onClick={tickColor}
+            onClick={updateClickDate}
             className="color-circle"
             style={{
-              backgroundColor: toHslString(getColorProgress(tickProgress())),
+              backgroundColor: toHslString(
+                getColorProgress(getButtonLifePercent())
+              ),
             }}
           ></div>
         </div>
-        <button onClick={updateClickDate}>Update Click Data</button>
       </div>
     </div>
   );
