@@ -59,18 +59,14 @@ code {
 .color-circle:active {
   box-shadow: rgba(0,0,0, 0.2) 0px 16px 16px inset
 }
-
-.score-circle {
-  width: 2em;
-  height: 2em;
-  border-radius: 100%;
-  border: 2px solid #111;
-}
-
 .scoreboard {
   position: absolute;
   top: 1em;
   left: 1em;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5em;
+  padding: 0.5em 1em;
   color: #111;
   background-color: white;
   border: 2px solid grey;
@@ -83,13 +79,21 @@ code {
   font-weight: bold;
 }
 
-.scoreboard {
-  padding: 0.5em 1em;
-
+.scoreboard .user-list {
+  display: grid;
+  grid-template-columns: 1fr min-content;
+  grid-gap: 0.25em;
+  column-gap: 1em;
 }
 
-.scoreboard li {
-  display: flex;
-  align-items: center;
-  gap: 1em;
+.scoreboard .user-id {
+  align-self: center;
+  font-size: 16px;
+}
+
+.score-circle {
+  width: 1.5em;
+  height: 1.5em;
+  border-radius: 100%;
+  border: 1px solid #111;
 }

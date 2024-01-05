@@ -127,19 +127,21 @@ function App() {
       {users && (
         <div className="scoreboard">
           <h2>Scoreboard</h2>
-          <ol>
-            {getScoreboardUsers().map((user) => (
-              <li>
-                {user.userID},{" "}
+          <div className="user-list">
+            {getScoreboardUsers().map((user, index) => (
+              <>
+                <div className="user-id">
+                  {index + 1}. {user.userID}
+                </div>
                 <div
                   className="score-circle"
                   style={{
                     backgroundColor: toHslString(getColorProgress(user.score)),
                   }}
                 ></div>
-              </li>
+              </>
             ))}
-          </ol>
+          </div>
           <div className="click-counter">Total Clicks: {totalClicks}</div>
         </div>
       )}
