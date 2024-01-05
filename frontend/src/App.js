@@ -5,27 +5,27 @@ function App() {
   const buttonLifeSpan = 1000 * 60 * 60 * 24 * 7 * 2; // Two Weeks
 
   const [mostRecentClick, setMostRecentClick] = useState(new Date());
-  const [users, setUsers] = useState(null)
-  const [totalClicks, setTotalClicks] = useState(null)
+  const [users, setUsers] = useState(null);
+  const [totalClicks, setTotalClicks] = useState(null);
 
   function getUserID() {
-    let userID = window.localStorage.getItem('userID');
+    let userID = window.localStorage.getItem("userID");
     if (!userID) {
-      userID = crypto.randomUUID()
-      window.localStorage.setItem('userID', userID)
+      userID = crypto.randomUUID();
+      window.localStorage.setItem("userID", userID);
     }
-    return userID
+    return userID;
   }
-  
-  const userID = getUserID()
+
+  const userID = getUserID();
 
   useEffect(() => {
     (async function fetchData() {
       const response = await fetch("http://localhost:8000/data");
       const data = await response.json();
       setMostRecentClick(new Date(data.mostRecentClick));
-      setTotalClicks(data.totalClicks)
-      setUsers(data.users)
+      setTotalClicks(data.totalClicks);
+      setUsers(data.users);
     })();
   }, []);
 
@@ -69,18 +69,17 @@ function App() {
   }
 
   function isButtonDisabled() {
-    if (users === null || totalClicks === null)
-      return true
+    if (users === null || totalClicks === null) return true;
 
-    const user = users.find((user) => user.userID === userID)
+    const user = users.find((user) => user.userID === userID);
 
     if (user) {
       if (user.score > getButtonLifePercent()) {
-        console.log('is disbaled!')
-        return true
+        console.log("is disbaled!");
+        return true;
       }
     }
-    return false
+    return false;
   }
 
   function toHslString({ hue, saturation, lightness }) {
@@ -88,18 +87,18 @@ function App() {
   }
 
   async function sendClick() {
-    const bodyData = {userID: userID, score: getButtonLifePercent()}
+    const bodyData = { userID: userID, score: getButtonLifePercent() };
     const response = await fetch("http://localhost:8000/click", {
       method: "POST",
       headers: {
-        "Content-Type": "application/json"
+        "Content-Type": "application/json",
       },
-      body: JSON.stringify(bodyData)
+      body: JSON.stringify(bodyData),
     });
     const data = await response.json();
     setMostRecentClick(new Date(data.mostRecentClick));
-    setTotalClicks(data.totalClicks)
-    setUsers(data.users)
+    setTotalClicks(data.totalClicks);
+    setUsers(data.users);
   }
 
   return (
@@ -120,6 +119,24 @@ function App() {
         </div>
         <div>Total Clicks: {totalClicks}</div>
       </div>
+      {users && (
+        <div className="scoreboard">
+          <h2>Scoreboard</h2>
+          <ol>
+            {users.map((user) => (
+              <li>
+                {user.userID},{" "}
+                <div
+                  className="score-circle"
+                  style={{
+                    backgroundColor: toHslString(getColorProgress(user.score)),
+                  }}
+                ></div>
+              </li>
+            ))}
+          </ol>
+        </div>
+      )}
     </div>
   );
 }

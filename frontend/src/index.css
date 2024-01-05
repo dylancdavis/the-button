@@ -52,3 +52,32 @@ code {
 .color-circle:active {
   box-shadow: rgba(0,0,0, 0.2) 0px 16px 16px inset
 }
+
+.score-circle {
+  width: 2em;
+  height: 2em;
+  border-radius: 100%;
+  border: 2px solid #111;
+}
+
+.scoreboard {
+  position: absolute;
+  top: 1em;
+  left: 1em;
+  color: #111;
+  background-color: white;
+  border: 2px solid grey;
+  border-radius: 16px;
+  box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+}
+
+ol {
+  margin: 0px;
+  padding: 0px;
+}
+
+.scoreboard li {
+  display: flex;
+  align-items: center;
+  gap: 1em;
+}
