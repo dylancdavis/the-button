@@ -6,6 +6,8 @@ const port = 8000;
 import { LowSync } from "lowdb";
 import { JSONFileSync } from "lowdb/node";
 
+app.use(express.json())
+
 app.use(function (req, res, next) {
   res.header("Access-Control-Allow-Origin", "*");
   res.header(
@@ -26,8 +28,9 @@ app.get("/last-clicked", (req, res) => {
   res.send(JSON.stringify(dateToSend));
 });
 
-app.post("/last-clicked", (req, res) => {
+app.post("/click", (req, res) => {
   const db = new LowSync(new JSONFileSync("db.json"), {});
+  console.log('Request body:', req.body)
   db.read();
   db.update((data) => {
     data.totalClicks++;

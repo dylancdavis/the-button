@@ -70,8 +70,13 @@ function App() {
   }
 
   async function updateClickDate() {
-    const response = await fetch("http://localhost:8000/last-clicked", {
+    const bodyData = {userID: userID}
+    const response = await fetch("http://localhost:8000/click", {
       method: "POST",
+      headers: {
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify(bodyData)
     });
     const data = await response.json();
     console.log("data:", data);
