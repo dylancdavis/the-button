@@ -1,7 +1,7 @@
 // const express = require("express");
 import express from "express";
 const app = express();
-const port = 8000;
+const port = process.env.PORT || 8080;
 
 import { LowSync } from "lowdb";
 import { JSONFileSync } from "lowdb/node";
