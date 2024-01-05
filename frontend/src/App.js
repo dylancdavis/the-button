@@ -53,7 +53,7 @@ function App() {
   return (
     <div className="App">
       <div className="content">
-        <h1>Color Circle</h1>
+        <h1>The Button</h1>
         <div className="color-circle-wrapper">
           <div
             onClick={tickColor}
