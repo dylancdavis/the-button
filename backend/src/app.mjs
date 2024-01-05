@@ -22,7 +22,8 @@ app.get("/", (req, res) => {
 app.get("/last-clicked", (req, res) => {
   const db = new LowSync(new JSONFileSync("db.json"), {});
   db.read();
-  res.send(db.data);
+  const dateToSend = db.data.lastClicked ?? db.data.startingTime;
+  res.send(JSON.stringify(dateToSend));
 });
 
 app.post("/last-clicked", (req, res) => {
