@@ -2,6 +2,7 @@
 import express from "express";
 const app = express();
 const port = process.env.PORT || 8080;
+const dbFile = "data/db.json";
 
 import { LowSync } from "lowdb";
 import { JSONFileSync } from "lowdb/node";
@@ -20,13 +21,13 @@ app.use(function (req, res, next) {
 });
 
 app.get("/api/data", (req, res) => {
-  const db = new LowSync(new JSONFileSync("db.json"), {});
+  const db = new LowSync(new JSONFileSync(dbFile), {});
   db.read();
   res.send(JSON.stringify(db.data));
 });
 
 app.post("/api/click", (req, res) => {
-  const db = new LowSync(new JSONFileSync("db.json"), {});
+  const db = new LowSync(new JSONFileSync(dbFile), {});
   const bodyData = req.body;
   db.read();
   const users = db.data.users;
