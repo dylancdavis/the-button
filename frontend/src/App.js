@@ -64,7 +64,7 @@ function App() {
 
   async function updateClickDate() {
     const response = await fetch("http://localhost:8000/last-clicked", {
-      method: "POST",
+      method: "PUT",
     });
     const data = await response.json();
     console.log("data:", data);
