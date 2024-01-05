@@ -95,7 +95,12 @@ function App() {
   }
 
   async function sendClick() {
-    const bodyData = { userID: userID, score: getButtonLifePercent() };
+    if (!username) return;
+    const bodyData = {
+      userID: userID,
+      score: getButtonLifePercent(),
+      name: username,
+    };
     const response = await fetch("http://localhost:8000/click", {
       method: "POST",
       headers: {
@@ -140,7 +145,7 @@ function App() {
             {getScoreboardUsers().map((user, index) => (
               <>
                 <div className="user-id">
-                  {index + 1}. {user.userID}
+                  {index + 1}. {user.name}
                 </div>
                 <div
                   className="score-circle"
