@@ -8,7 +8,6 @@ function App() {
   const [users, setUsers] = useState(null)
   const [totalClicks, setTotalClicks] = useState(null)
 
-
   function getUserID() {
     let userID = window.localStorage.getItem('userID');
     if (!userID) {
@@ -22,9 +21,11 @@ function App() {
 
   useEffect(() => {
     (async function fetchData() {
-      const response = await fetch("http://localhost:8000/last-clicked");
+      const response = await fetch("http://localhost:8000/data");
       const data = await response.json();
-      setMostRecentClick(new Date(data));
+      setMostRecentClick(new Date(data.mostRecentClick));
+      setTotalClicks(data.totalClicks)
+      setUsers(data.users)
     })();
   }, []);
 
@@ -67,6 +68,10 @@ function App() {
     };
   }
 
+  function dataLoaded() {
+    return users !== null && totalClicks !== null
+  }
+
   function toHslString({ hue, saturation, lightness }) {
     return `hsl(${hue}, ${saturation}%, ${lightness}%)`;
   }
@@ -91,6 +96,7 @@ function App() {
         <h1>The Button</h1>
         <div className="color-circle-wrapper">
           <div
+            disabled={!dataLoaded()}
             onClick={sendClick}
             className="color-circle"
             style={{

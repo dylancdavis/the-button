@@ -21,11 +21,10 @@ app.get("/", (req, res) => {
   res.send("Hello World!");
 });
 
-app.get("/last-clicked", (req, res) => {
+app.get("/data", (req, res) => {
   const db = new LowSync(new JSONFileSync("db.json"), {});
   db.read();
-  const dateToSend = db.data.mostRecentClick ?? db.data.startingTime;
-  res.send(JSON.stringify(dateToSend));
+  res.send(JSON.stringify(db.data));
 });
 
 app.post("/click", (req, res) => {
