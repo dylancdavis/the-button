@@ -4,9 +4,11 @@ import "./App.css";
 function App() {
   const buttonLifeSpan = 1000 * 60 * 60 * 24 * 7 * 2; // Two Weeks
 
-  const [lastClickDate, setLastClickDate] = useState(new Date());
+  const [mostRecentClick, setMostRecentClick] = useState(new Date());
+  const [users, setUsers] = useState(null)
+  const [totalClicks, setTotalClicks] = useState(null)
 
-  
+
   function getUserID() {
     let userID = window.localStorage.getItem('userID');
     if (!userID) {
@@ -22,13 +24,13 @@ function App() {
     (async function fetchData() {
       const response = await fetch("http://localhost:8000/last-clicked");
       const data = await response.json();
-      setLastClickDate(new Date(data));
+      setMostRecentClick(new Date(data));
     })();
   }, []);
 
   function getButtonLifePercent() {
     const now = new Date();
-    const buttonAge = now - lastClickDate;
+    const buttonAge = now - mostRecentClick;
     if (buttonAge > buttonLifeSpan) return 1;
     return buttonAge / buttonLifeSpan;
   }
@@ -80,7 +82,7 @@ function App() {
     });
     const data = await response.json();
     console.log("data:", data);
-    setLastClickDate(new Date(data.mostRecentClick));
+    setMostRecentClick(new Date(data.mostRecentClick));
   }
 
   return (
