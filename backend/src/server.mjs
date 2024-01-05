@@ -19,13 +19,13 @@ app.use(function (req, res, next) {
   next();
 });
 
-app.get("api/data", (req, res) => {
+app.get("/api/data", (req, res) => {
   const db = new LowSync(new JSONFileSync("db.json"), {});
   db.read();
   res.send(JSON.stringify(db.data));
 });
 
-app.post("api/click", (req, res) => {
+app.post("/api/click", (req, res) => {
   const db = new LowSync(new JSONFileSync("db.json"), {});
   const bodyData = req.body;
   db.read();
