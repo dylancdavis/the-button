@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import "./App.css";
 
 async function fetchData() {
-  const response = await fetch("http://localhost:8000");
+  const response = await fetch("http://localhost:8000/last-clicked");
   const data = await response.json();
   console.log("data:", data);
 }
