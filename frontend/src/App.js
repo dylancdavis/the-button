@@ -88,6 +88,8 @@ function App() {
   function isButtonDisabled() {
     if (users === null || totalClicks === null) return true;
 
+    if (!username && newUser) return true;
+
     const user = users.find((user) => user.userID === userID);
 
     if (user) {

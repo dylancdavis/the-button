@@ -56,8 +56,13 @@ code {
   cursor: pointer;
 }
 
-.color-circle:active {
+.color-circle:active:not(:disabled) {
   box-shadow: rgba(0,0,0, 0.2) 0px 16px 16px inset
+}
+
+.color-circle:disabled {
+  cursor: not-allowed;
+  filter: contrast(0.5);
 }
 
 .content .input-wrapper {
