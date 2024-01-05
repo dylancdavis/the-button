@@ -68,8 +68,19 @@ function App() {
     };
   }
 
-  function dataLoaded() {
-    return users !== null && totalClicks !== null
+  function isButtonDisabled() {
+    if (users === null || totalClicks === null)
+      return true
+
+    const user = users.find((user) => user.userID === userID)
+
+    if (user) {
+      if (user.score > getButtonLifePercent()) {
+        console.log('is disbaled!')
+        return true
+      }
+    }
+    return false
   }
 
   function toHslString({ hue, saturation, lightness }) {
@@ -96,8 +107,8 @@ function App() {
       <div className="content">
         <h1>The Button</h1>
         <div className="color-circle-wrapper">
-          <div
-            disabled={!dataLoaded()}
+          <button
+            disabled={isButtonDisabled()}
             onClick={sendClick}
             className="color-circle"
             style={{
@@ -105,7 +116,7 @@ function App() {
                 getColorProgress(getButtonLifePercent())
               ),
             }}
-          ></div>
+          ></button>
         </div>
         <div>Total Clicks: {totalClicks}</div>
       </div>
