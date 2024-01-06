@@ -7,6 +7,7 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "build:ui": "rm -rf build && cd ../frontend && npm run build && cp -r build ../backend",
     "deploy": "fly deploy && fly scale count 1",
+    "deploy:full": "npm run build:ui && npm run deploy",
     "start": "npx nodemon --ignore data/",
     "build-start": "npm run build:ui && npm start"
   },
