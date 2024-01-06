@@ -1,6 +1,8 @@
 import { useEffect, useState } from "react";
 import "./App.css";
 import "./reset.css";
+import chroma from "chroma-js";
+import ntc from "ntcjs";
 
 const baseURL = "";
 // const baseURL = "http://localhost:8080";
@@ -67,8 +69,8 @@ function App() {
       const scaledPercent = unitInterval / firstThreshold;
       return {
         hue: scaledPercent * 320,
-        saturation: 100,
-        lightness: 50,
+        saturation: 1,
+        lightness: 0.5,
       };
     }
     if (unitInterval < secondThreshold) {
@@ -76,8 +78,8 @@ function App() {
         (unitInterval - firstThreshold) / (secondThreshold - firstThreshold);
       return {
         hue: 320,
-        saturation: 100,
-        lightness: 50 + scaledPercent * 50,
+        saturation: 1,
+        lightness: 0.5 + scaledPercent * 0.5,
       };
     }
     const scaledPercent =
@@ -85,7 +87,7 @@ function App() {
     return {
       hue: 320,
       saturation: 0,
-      lightness: 100 - scaledPercent * 100,
+      lightness: 1 - scaledPercent,
     };
   }
 
@@ -106,7 +108,15 @@ function App() {
   }
 
   function toHslString({ hue, saturation, lightness }) {
-    return `hsl(${hue}, ${saturation}%, ${lightness}%)`;
+    return `hsl(${hue}, ${saturation * 100}%, ${lightness * 100}%)`;
+  }
+
+  function scoreToName(score) {
+    const { hue, saturation, lightness } = getColorProgress(score);
+    const chromaColor = chroma.hsl(hue, saturation, lightness);
+    const hex = chromaColor.hex();
+    const name = ntc.name(hex)[1];
+    return name;
   }
 
   async function sendClick() {
