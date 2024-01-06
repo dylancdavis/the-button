@@ -1,7 +1,43 @@
 {
   "isAlive": true,
   "startingTime": "2024-01-01",
-  "mostRecentClick": "2024-01-01",
-  "totalClicks":0,
-  "users": []
+  "mostRecentClick": "2024-01-06T14:46:23.018Z",
+  "totalClicks": 18,
+  "users": [
+    {
+      "userID": "419b8a3e-529d-4c77-a698-af5bc6b7ca63",
+      "score": 0.00022959242724867725,
+      "name": "Myah"
+    },
+    {
+      "userID": "4819aa22-75af-48bf-9c52-b12bbcbb82d7",
+      "score": 0.00016487516534391535,
+      "name": "Peyton"
+    },
+    {
+      "userID": "b875b945-9910-48be-83b8-7fdd73dad8ab",
+      "score": 0.002710481150793651,
+      "name": "Jana"
+    },
+    {
+      "userID": "b43b5000-9a46-4df0-b384-f040f213c3aa",
+      "score": 0.003984502314814815,
+      "name": "Cole"
+    },
+    {
+      "userID": "31ca70ea-1425-4a3f-8caa-77cc1688c001",
+      "score": 0.002135654761904762,
+      "name": "karenna"
+    },
+    {
+      "userID": "fe4f79eb-bafa-4893-9539-8422fa51accd",
+      "score": 0.000028040674603174604,
+      "name": "Karenna"
+    },
+    {
+      "userID": "66629d5e-8e2c-4acb-bf6a-d5542bea7f04",
+      "score": 0.030267907572751322,
+      "name": "Sadie"
+    }
+  ]
 }
