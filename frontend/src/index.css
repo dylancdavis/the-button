@@ -122,8 +122,25 @@ code {
 }
 
 .score-circle {
+  display: relative;
   width: 1.5em;
   height: 1.5em;
   border-radius: 100%;
   border: 1px solid #111;
+}
+
+.score-circle .tooltip-text {
+  visibility: hidden;
+  padding: 0.25em;
+  border: 1px solid grey;
+}
+
+.score-circle:hover .tooltip-text {
+  visibility: visible;
+  position: relative;
+  left: 2em;
+  width: min-content;
+  z-index: 1;
+  background-color: whitesmoke;
+  border-radius: 4px;
 }

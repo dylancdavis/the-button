@@ -4,8 +4,8 @@ import "./reset.css";
 import chroma from "chroma-js";
 import ntc from "ntcjs";
 
-const baseURL = "";
-// const baseURL = "http://localhost:8080";
+// const baseURL = "";
+const baseURL = "http://localhost:8080";
 const apiURL = `${baseURL}/api`;
 
 function App() {
@@ -183,7 +183,9 @@ function App() {
                   style={{
                     backgroundColor: toHslString(getColorProgress(user.score)),
                   }}
-                ></div>
+                >
+                  <div className="tooltip-text">{scoreToName(user.score)}</div>
+                </div>
               </>
             ))}
           </div>
