@@ -149,6 +149,7 @@ function App() {
     setMostRecentClick(new Date(data.mostRecentClick));
     setTotalClicks(data.totalClicks);
     setUsers(data.users);
+    setNewUser(false);
   }
 
   return (
@@ -198,7 +199,7 @@ function App() {
               )}
             </>
           ) : (
-            <div class="button-message">
+            <div className="button-message">
               welcome back, {username.toLowerCase()}
             </div>
           )}
