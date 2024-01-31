@@ -114,18 +114,9 @@ function App() {
 
   function isButtonDisabled() {
     if (users === null || totalClicks === null) return true;
-
     if (!username && newUser) return true;
-
     const user = users.find((user) => user.userID === userID);
-
-    if (user) {
-      if (user.score > getButtonLifePercent()) {
-        console.log("is disbaled!");
-        return true;
-      }
-    }
-    return false;
+    return user && user.score > getButtonLifePercent();
   }
 
   function toHslString({ hue, saturation, lightness }) {
