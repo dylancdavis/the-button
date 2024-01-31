@@ -4,8 +4,8 @@ import "./reset.css";
 import chroma from "chroma-js";
 import ntc from "ntcjs";
 
-// const baseURL = "";
-const baseURL = "http://localhost:8080";
+const baseURL = "";
+// const baseURL = "http://localhost:8080";
 const apiURL = `${baseURL}/api`;
 
 function App() {
