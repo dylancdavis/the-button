@@ -144,3 +144,10 @@ code {
   background-color: whitesmoke;
   border-radius: 4px;
 }
+
+.app-version {
+	position: absolute;
+	right: 1em;
+	bottom: 1em;
+	color: grey;
+}
