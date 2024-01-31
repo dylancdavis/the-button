@@ -67,7 +67,10 @@ code {
 }
 
 .content .input-wrapper {
+  display: flex;
   padding: 1em;
+  align-items: center;
+  justify-content: center;
 }
 
 .content input {
@@ -90,6 +93,12 @@ code {
     position: absolute;
     top: 1em;
     left: 1em;
+  }
+}
+
+@media (max-width: 450px) {
+  .content {
+    width: 300px;
   }
 }
 
