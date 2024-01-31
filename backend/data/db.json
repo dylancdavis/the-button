@@ -1,8 +1,8 @@
 {
   "isAlive": true,
   "startingTime": "2024-01-01",
-  "mostRecentClick": "2024-01-06T14:46:23.018Z",
-  "totalClicks": 18,
+  "mostRecentClick": "2024-01-31T13:30:48.284Z",
+  "totalClicks": 74,
   "users": [
     {
       "userID": "419b8a3e-529d-4c77-a698-af5bc6b7ca63",
@@ -16,12 +16,12 @@
     },
     {
       "userID": "b875b945-9910-48be-83b8-7fdd73dad8ab",
-      "score": 0.002710481150793651,
+      "score": 0.0059194262566137565,
       "name": "Jana"
     },
     {
       "userID": "b43b5000-9a46-4df0-b384-f040f213c3aa",
-      "score": 0.003984502314814815,
+      "score": 0.05756213541666667,
       "name": "Cole"
     },
     {
@@ -36,8 +36,83 @@
     },
     {
       "userID": "66629d5e-8e2c-4acb-bf6a-d5542bea7f04",
-      "score": 0.030267907572751322,
+      "score": 0.07053656911375661,
       "name": "Sadie"
+    },
+    {
+      "userID": "8a92db12-651c-401d-9915-7ecac62eec2c",
+      "score": 0.00910520916005291,
+      "name": "Anna"
+    },
+    {
+      "userID": "95b27e24-09d5-4dbb-b909-e42689275027",
+      "score": 0.02133186507936508,
+      "name": "Sander Klein"
+    },
+    {
+      "userID": "9cf62b44-55e7-4121-8486-6e2917793d7d",
+      "score": 0.00009355489417989418,
+      "name": "Even Torgersen"
+    },
+    {
+      "userID": "8f09bd79-bf69-4aba-bc2e-202bd3894ea1",
+      "score": 0.00008105489417989418,
+      "name": "Allen Labadie"
+    },
+    {
+      "userID": "b2899663-a904-49c1-85a3-fafbb1090ad2",
+      "score": 0.03710860201719577,
+      "name": "Jana"
+    },
+    {
+      "userID": "06557ac7-6273-4cc6-b016-352f30aa1276",
+      "score": 0.07092910383597884,
+      "name": "Nick"
+    },
+    {
+      "userID": "8b9a0a87-65e3-4505-a788-bd7fa6b52f31",
+      "score": 0.07115079447751323,
+      "name": "Zac"
+    },
+    {
+      "userID": "6222222e-60b3-4809-842d-0d79427d78f0",
+      "score": 0.026292904265873017,
+      "name": "What"
+    },
+    {
+      "userID": "30b40489-5175-4408-bc6b-9581fff3827e",
+      "score": 0.008911496362433862,
+      "name": "Jana"
+    },
+    {
+      "userID": "5ddef35f-25cd-48d3-addb-c7a87235ff15",
+      "score": 0.034876395502645506,
+      "name": "Mia"
+    },
+    {
+      "userID": "b65bd17e-8dff-4855-9ff6-56792c8e8ad3",
+      "score": 0.010844752810846561,
+      "name": "Tony"
+    },
+    {
+      "userID": "c5a560bb-b99f-4210-9122-134dd96fb2c7",
+      "score": 0.0427418287037037,
+      "name": "Zandair"
+    },
+    {
+      "userID": "ddf8a66b-fb01-4414-bab2-79cd48e7c730",
+      "score": 0.05565651207010582,
+      "name": "McKenna"
+    },
+    {
+      "userID": "b694a719-d354-4aba-bde1-502b969e6e10",
+      "score": 0.000025068617724867725,
+      "name": "Mia"
+    },
+    {
+      "userID": "9c6c9121-f5c9-4cd9-8ca0-343b7b3fed29",
+      "score": 0.042219424603174606,
+      "name": "Mia"
     }
   ]
 }
