@@ -161,3 +161,20 @@ code {
 	bottom: 1em;
 	color: grey;
 }
+
+.input-swapper {
+	position: relative;
+	right: 2em;
+	border-radius: 100%;
+	font-weight: bold;
+	background-color: #555;
+	color: white;
+	border: 0px;
+	font-size: 18px;
+	cursor: pointer;
+}
+
+.input-swapper:disabled {
+  cursor: not-allowed;
+  filter: contrast(0.5);
+}

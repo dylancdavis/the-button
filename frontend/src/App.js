@@ -4,8 +4,8 @@ import "./reset.css";
 import chroma from "chroma-js";
 import ntc from "ntcjs";
 
-const baseURL = "";
-// const baseURL = "http://localhost:8080";
+// const baseURL = "";
+const baseURL = "http://localhost:8080";
 const apiURL = `${baseURL}/api`;
 
 function App() {
@@ -17,7 +17,11 @@ function App() {
 
   const [username, setUsername] = useState("");
 
+  const [inputUserID, setInputUserID] = useState("");
+
   const [newUser, setNewUser] = useState(true);
+
+  const [isReturningUser, setIsReturningUser] = useState(false);
 
   function getUserID() {
     let userID = window.localStorage.getItem("userID");
@@ -28,7 +32,24 @@ function App() {
     return userID;
   }
 
-  const userID = getUserID();
+  function swapInputType() {
+    setIsReturningUser(!isReturningUser);
+  }
+
+  const [userID, setUserID] = useState(getUserID());
+
+  function changeToUserID() {
+    const foundUser = users.find((user) => user.userID === inputUserID);
+    if (foundUser) {
+      localStorage.setItem("userID", inputUserID);
+      setUserID(inputUserID);
+      setNewUser(false);
+    } else alert("Not found.");
+  }
+
+  function invalidUserID() {
+    return !users.find((user) => user.userID === inputUserID);
+  }
 
   function getScoreboardUsers() {
     const sorted = users.sort((a, b) => b.score - a.score);
@@ -157,11 +178,34 @@ function App() {
         </div>
         <div className="input-wrapper">
           {newUser ? (
-            <input
-              value={username}
-              onChange={(e) => setUsername(e.target.value)}
-              placeholder="What's your name?"
-            ></input>
+            <>
+              {isReturningUser ? (
+                <input
+                  value={inputUserID}
+                  onChange={(e) => setInputUserID(e.target.value)}
+                  placeholder="What's your user ID?"
+                ></input>
+              ) : (
+                <input
+                  value={username}
+                  onChange={(e) => setUsername(e.target.value)}
+                  placeholder="What's your name?"
+                ></input>
+              )}
+              {inputUserID ? (
+                <button
+                  className="input-swapper"
+                  onClick={changeToUserID}
+                  disabled={invalidUserID()}
+                >
+                  ✓
+                </button>
+              ) : (
+                <button className="input-swapper" onClick={swapInputType}>
+                  ⇆
+                </button>
+              )}
+            </>
           ) : (
             <div class="button-message">
               welcome back, {username.toLowerCase()}
