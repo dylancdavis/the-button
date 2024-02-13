@@ -1,8 +1,8 @@
 {
   "isAlive": true,
   "startingTime": "2024-01-01",
-  "mostRecentClick": "2024-01-31T13:30:48.284Z",
-  "totalClicks": 74,
+  "mostRecentClick": "2024-02-11T14:38:00.088Z",
+  "totalClicks": 118,
   "users": [
     {
       "userID": "4819aa22-75af-48bf-9c52-b12bbcbb82d7",
@@ -11,7 +11,7 @@
     },
     {
       "userID": "b43b5000-9a46-4df0-b384-f040f213c3aa",
-      "score": 0.05756213541666667,
+      "score": 0.06494058118386244,
       "name": "Cole"
     },
     {
@@ -21,7 +21,7 @@
     },
     {
       "userID": "66629d5e-8e2c-4acb-bf6a-d5542bea7f04",
-      "score": 0.07053656911375661,
+      "score": 0.07545731068121693,
       "name": "Sadie"
     },
     {
@@ -56,12 +56,12 @@
     },
     {
       "userID": "8b9a0a87-65e3-4505-a788-bd7fa6b52f31",
-      "score": 0.07115079447751323,
+      "score": 0.07301645089285715,
       "name": "Zac"
     },
     {
       "userID": "b65bd17e-8dff-4855-9ff6-56792c8e8ad3",
-      "score": 0.010844752810846561,
+      "score": 0.03293486937830688,
       "name": "Tony"
     },
     {
@@ -76,8 +76,23 @@
     },
     {
       "userID": "9c6c9121-f5c9-4cd9-8ca0-343b7b3fed29",
-      "score": 0.042219424603174606,
+      "score": 0.06004344659391534,
       "name": "Mia"
+    },
+    {
+      "userID": "6222222e-60b3-4809-842d-0d79427d78f0",
+      "score": 0.041678381283068784,
+      "name": "Jacob"
+    },
+    {
+      "userID": "0a6b3340-003a-41da-9db6-2119567da1e4",
+      "score": 0.03281201388888889,
+      "name": "Anna"
+    },
+    {
+      "userID": "aba0d5e9-39e2-4259-b95b-ca48dc8e1073",
+      "score": 0.00038068039021164023,
+      "name": "Brent"
     }
   ]
 }
