@@ -1,8 +1,8 @@
 {
   "isAlive": true,
   "startingTime": "2024-01-01",
-  "mostRecentClick": "2024-02-13T00:42:52.015Z",
-  "totalClicks": 118,
+  "mostRecentClick": "2024-03-02T02:13:20.116Z",
+  "totalClicks": 139,
   "users": [
     {
       "userID": "4819aa22-75af-48bf-9c52-b12bbcbb82d7",
@@ -11,7 +11,7 @@
     },
     {
       "userID": "b43b5000-9a46-4df0-b384-f040f213c3aa",
-      "score": 0.06494058118386244,
+      "score": 0.0919475636574074,
       "name": "Cole"
     },
     {
@@ -21,12 +21,12 @@
     },
     {
       "userID": "66629d5e-8e2c-4acb-bf6a-d5542bea7f04",
-      "score": 0.07545731068121693,
+      "score": 0.0927531820436508,
       "name": "Sadie"
     },
     {
       "userID": "8a92db12-651c-401d-9915-7ecac62eec2c",
-      "score": 0.00910520916005291,
+      "score": 0.09130480324074074,
       "name": "Anna"
     },
     {
@@ -51,12 +51,12 @@
     },
     {
       "userID": "06557ac7-6273-4cc6-b016-352f30aa1276",
-      "score": 0.07092910383597884,
+      "score": 0.0923475636574074,
       "name": "Nick"
     },
     {
       "userID": "8b9a0a87-65e3-4505-a788-bd7fa6b52f31",
-      "score": 0.07301645089285715,
+      "score": 0.07461812417328043,
       "name": "Zac"
     },
     {
@@ -71,7 +71,7 @@
     },
     {
       "userID": "ddf8a66b-fb01-4414-bab2-79cd48e7c730",
-      "score": 0.05565651207010582,
+      "score": 0.06992372933201058,
       "name": "McKenna"
     },
     {
@@ -81,17 +81,22 @@
     },
     {
       "userID": "6222222e-60b3-4809-842d-0d79427d78f0",
-      "score": 0.041678381283068784,
+      "score": 0.04446609871031746,
       "name": "Jacob"
     },
     {
-      "userID": "0a6b3340-003a-41da-9db6-2119567da1e4",
-      "score": 0.03281201388888889,
-      "name": "Anna"
+      "userID": "aba0d5e9-39e2-4259-b95b-ca48dc8e1073",
+      "score": 0.03111682457010582,
+      "name": "Brent"
     },
     {
-      "userID": "aba0d5e9-39e2-4259-b95b-ca48dc8e1073",
-      "score": 0.00038068039021164023,
+      "userID": "59c90c6e-1c08-4f55-8d53-f5a6436493cd",
+      "score": 0.03232865244708995,
+      "name": "Aryanna Tremblay"
+    },
+    {
+      "userID": "cae3c098-925e-4fb6-ae43-9db696dcffba",
+      "score": 0.03111682457010582,
       "name": "Brent"
     }
   ]
