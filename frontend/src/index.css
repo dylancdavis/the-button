@@ -189,3 +189,9 @@ code {
   cursor: not-allowed;
   filter: contrast(0.5);
 }
+
+.goodbye-message {
+  font-size: 24px;
+  color: #757575;
+  text-align: center;
+}
