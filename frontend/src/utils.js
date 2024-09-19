@@ -1,7 +1,7 @@
 import chroma from "chroma-js";
 import ntc from "ntcjs";
 
-export function getColorProgress(unitInterval) {
+export function hslFromLifePercentage(unitInterval) {
   if (unitInterval > 1 || unitInterval < 0) return;
 
   const firstThreshold = 0.7;
@@ -33,14 +33,18 @@ export function getColorProgress(unitInterval) {
   };
 }
 
-export function toHslString({ hue, saturation, lightness }) {
+export function hslAsCSS({ hue, saturation, lightness }) {
   return `hsl(${hue}, ${saturation * 100}%, ${lightness * 100}%)`;
 }
 
-export function scoreToName(score) {
-    const { hue, saturation, lightness } = getColorProgress(score);
-    const chromaColor = chroma.hsl(hue, saturation, lightness);
-    const hex = chromaColor.hex();
-    const name = ntc.name(hex)[1];
-    return name;
-  }
+export function getColorNameFromScore(score) {
+  const { hue, saturation, lightness } = hslFromLifePercentage(score);
+  const chromaColor = chroma.hsl(hue, saturation, lightness);
+  const hex = chromaColor.hex();
+  const name = ntc.name(hex)[1];
+  return name;
+}
+
+export function calculateScore(ageInSeconds) {
+  return 0.00273222 * ageInSeconds ** 2 + ageInSeconds;
+}

@@ -2,7 +2,7 @@ import "./App.css";
 import { BigButton } from "./BigButton";
 import "./reset.css";
 import { Scoreboard } from "./Scoreboard";
-import { getColorProgress, toHslString } from "./utils";
+import { hslFromLifePercentage, hslAsCSS } from "./utils";
 
 const apiURL = "http://localhost:8080/api";
 // const apiURL = '/api';
@@ -28,7 +28,7 @@ function App() {
         <h1>The Button</h1>
         <BigButton
           onClick={sendClick}
-          color={toHslString(getColorProgress(getButtonLifePercent()))}
+          color={hslAsCSS(hslFromLifePercentage(getButtonLifePercent()))}
         />
         <div className="input-wrapper">
           <input placeholder="What's your name?"></input>

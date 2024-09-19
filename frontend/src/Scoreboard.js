@@ -1,4 +1,4 @@
-import { getColorProgress, scoreToName, toHslString } from "./utils";
+import { hslFromLifePercentage, getColorNameFromScore, hslAsCSS } from "./utils";
 
 export function Scoreboard({ users, totalClicks }) {
   if (!users) return null;
@@ -14,10 +14,10 @@ export function Scoreboard({ users, totalClicks }) {
             <div
               className="score-circle"
               style={{
-                backgroundColor: toHslString(getColorProgress(user.score)),
+                backgroundColor: hslAsCSS(hslFromLifePercentage(user.score)),
               }}
             >
-              <div className="tooltip-text">{scoreToName(user.score)}</div>
+              <div className="tooltip-text">{getColorNameFromScore(user.score)}</div>
             </div>
           </>
         ))}
