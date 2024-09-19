@@ -9,6 +9,8 @@ const apiURL = "http://localhost:8080/api";
 // const apiURL = '/api';
 
 function App() {
+  const [scores, setScores] = useState([]);
+  const [name, setName] = useState("");
 
   const secondsInOneWeek = 1000 * 60 * 60 * 24 * 7;
 
@@ -33,10 +35,14 @@ function App() {
           color={hslAsCSS(hslFromLifePercentage(getButtonLifePercent()))}
         />
         <div className="input-wrapper">
-          <input placeholder="What's your name?"></input>
+          <input
+            value={name}
+            onChange={(e) => setName(e.target)}
+            placeholder="What's your name?"
+          ></input>
         </div>
       </div>
-      <Scoreboard scores={[]} totalClicks={0} />
+      <Scoreboard scores={scores} totalClicks={0} />
       <div className="app-version">v2.0</div>
     </div>
   );
