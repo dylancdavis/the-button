@@ -1,11 +1,6 @@
-// const express = require("express");
 import express from "express";
 const app = express();
 const port = process.env.PORT || 8080;
-const dbFile = "data/db.json";
-
-import { LowSync } from "lowdb";
-import { JSONFileSync } from "lowdb/node";
 
 app.use(express.static("build"));
 
@@ -20,34 +15,8 @@ app.use(function (req, res, next) {
   next();
 });
 
-app.get("/api/data", (req, res) => {
-  const db = new LowSync(new JSONFileSync(dbFile), {});
-  db.read();
-  res.send(JSON.stringify(db.data));
-});
-
-app.post("/api/click", (req, res) => {
-  const db = new LowSync(new JSONFileSync(dbFile), {});
-  const bodyData = req.body;
-  db.read();
-  const users = db.data.users;
-  const user = users.find(({ userID }) => userID === bodyData.userID);
-  if (user) {
-    // User already exists.
-    // Ignore if new score is less.
-    if (bodyData.score < user.score) {
-      res.send(db.data);
-      return;
-    }
-    user.score = bodyData.score;
-  } else {
-    // Create new user
-    users.push(bodyData);
-  }
-  db.data.totalClicks++;
-  db.data.mostRecentClick = new Date();
-  db.write();
-  res.send(db.data);
+app.get("/api/ping", (req, res) => {
+  res.send("pong");
 });
 
 app.listen(port, () => {
