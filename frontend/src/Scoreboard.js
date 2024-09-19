@@ -1,23 +1,23 @@
 import { hslFromLifePercentage, getColorNameFromScore, hslAsCSS } from "./utils";
 
-export function Scoreboard({ users, totalClicks }) {
-  if (!users) return null;
+export function Scoreboard({ scores, totalClicks }) {
+  if (!scores) return null;
   return (
     <div className="scoreboard">
       <h2>Scoreboard</h2>
       <div className="user-list">
-        {users.map((user, index) => (
+        {scores.map((team, index) => (
           <>
             <div className="user-id">
-              {index + 1}. {user.name}
+              {index + 1}. {team.name}
             </div>
             <div
               className="score-circle"
               style={{
-                backgroundColor: hslAsCSS(hslFromLifePercentage(user.score)),
+                backgroundColor: hslAsCSS(hslFromLifePercentage(team.points)),
               }}
             >
-              <div className="tooltip-text">{getColorNameFromScore(user.score)}</div>
+              <div className="tooltip-text">{getColorNameFromScore(team.points)}</div>
             </div>
           </>
         ))}

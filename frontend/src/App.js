@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import "./App.css";
 import "./reset.css";
 import { BigButton } from "./BigButton";
@@ -9,6 +9,7 @@ const apiURL = "http://localhost:8080/api";
 // const apiURL = '/api';
 
 function App() {
+
   const secondsInOneWeek = 1000 * 60 * 60 * 24 * 7;
 
   function getButtonLifePercent() {
@@ -35,7 +36,7 @@ function App() {
           <input placeholder="What's your name?"></input>
         </div>
       </div>
-      <Scoreboard users={[]} totalClicks={0} />
+      <Scoreboard scores={[]} totalClicks={0} />
       <div className="app-version">v2.0</div>
     </div>
   );
