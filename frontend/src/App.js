@@ -114,7 +114,7 @@ function App() {
           <div className="click-counter">Total Clicks: {totalClicks}</div>
         </div>
       )}
-      <div className="app-version">v1.2</div>
+      <div className="app-version">v2.0</div>
     </div>
   );
 }
