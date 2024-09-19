@@ -1,6 +1,7 @@
+import React from "react";
 import "./App.css";
-import { BigButton } from "./BigButton";
 import "./reset.css";
+import { BigButton } from "./BigButton";
 import { Scoreboard } from "./Scoreboard";
 import { hslFromLifePercentage, hslAsCSS } from "./utils";
 
