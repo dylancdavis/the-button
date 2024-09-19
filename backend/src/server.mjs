@@ -40,14 +40,14 @@ app.get('/api/scores', async (req, res) => {
 })
 
 app.get('/api/clicks', async (req, res) => {
-  const { data: clicks, error } = await supabase.from('click').select().order('created_at', { ascending: false }).limit(10)
+  const { data: clicks, error } = await supabase.from('click').select().order('clicked', { ascending: false }).limit(10)
   res.json(clicks)
 })
 
 app.post('/api/clicks', async (req, res) => {
   const { team } = req.body
   // get most recent click
-  const { data: clicks } = await supabase.from('click').select().order('created_at', { ascending: false }).limit(1)
+  const { data: clicks } = await supabase.from('click').select().order('clicked', { ascending: false }).limit(1)
   const mostRecentClick = clicks[0]
   now = new Date()
   const timeSinceLastClick = now - new Date(mostRecentClick.created_at)
