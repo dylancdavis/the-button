@@ -1,9 +1,17 @@
 import express from "express";
+import dotenv from '@dotenvx/dotenvx'
+import { createClient } from '@supabase/supabase-js'
+import { calculateScore } from "./utils.mjs";
+
+dotenv.config()
 const app = express();
 const port = process.env.PORT || 8080;
 
-app.use(express.static("build"));
+const supabaseUrl = 'https://wlgpjikgdvkmemldjqjk.supabase.co'
+const supabaseKey = process.env.SUPABASE_KEY
+const supabase = createClient(supabaseUrl, supabaseKey)
 
+app.use(express.static("build"));
 app.use(express.json());
 
 app.use(function (req, res, next) {
@@ -18,6 +26,36 @@ app.use(function (req, res, next) {
 app.get("/api/ping", (req, res) => {
   res.send("pong");
 });
+
+app.get('/api/scores', async (req, res) => {
+  const { data: clicks, error } = await supabase.from('click').select()
+  const totalPointsByTeam = {}
+  for (const click of clicks) {
+    if (!totalPointsByTeam[click.team]) {
+      totalPointsByTeam[click.team] = click.points
+    }
+    totalPointsByTeam[click.team] += click.points
+  }
+  res.json(totalPointsByTeam)
+})
+
+app.get('/api/clicks', async (req, res) => {
+  const { data: clicks, error } = await supabase.from('click').select().order('created_at', { ascending: false }).limit(10)
+  res.json(clicks)
+})
+
+app.post('/api/clicks', async (req, res) => {
+  const { team } = req.body
+  // get most recent click
+  const { data: clicks } = await supabase.from('click').select().order('created_at', { ascending: false }).limit(1)
+  const mostRecentClick = clicks[0]
+  now = new Date()
+  const timeSinceLastClick = now - new Date(mostRecentClick.created_at)
+  const timeSinceLastClickInSeconds = timeSinceLastClick / 1000
+  const points = calculateScore(timeSinceLastClickInSeconds)
+  const { data: newClick } = await supabase.from('click').insert([{ team, points }])
+  res.json(newClick)
+})
 
 app.listen(port, () => {
   console.log(`Example app listening on port ${port}`);
