@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import "./App.css";
 import "./reset.css";
-import { BigButton } from "./BigButton";
+import { BigButton, ColorChangingButton } from "./ColorChangingButton";
 import { Scoreboard } from "./Scoreboard";
 import { hslFromLifePercentage, hslAsCSS } from "./utils";
 
@@ -30,9 +30,9 @@ function App() {
     <div className="App">
       <div className="content">
         <h1>The Button</h1>
-        <BigButton
+        <ColorChangingButton
           onClick={sendClick}
-          color={hslAsCSS(hslFromLifePercentage(getButtonLifePercent()))}
+          ageAsPercent={getButtonLifePercent}
         />
         <div className="input-wrapper">
           <input
