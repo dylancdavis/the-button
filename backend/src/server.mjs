@@ -29,10 +29,14 @@ app.get("/api/ping", (req, res) => {
   res.send("pong");
 });
 
-app.get("/api/click", (ws, req) => {
+app.ws("/api/click", (ws, req) => {
   ws.on("connection", (stream) => {
     console.log("someone connected!");
     console.log({ stream });
+  });
+
+  ws.on("message", (stream) => {
+    console.log("message received");
   });
 });
 
