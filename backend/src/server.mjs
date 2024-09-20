@@ -29,6 +29,13 @@ app.get("/api/ping", (req, res) => {
   res.send("pong");
 });
 
+app.get("/api/click", (ws, req) => {
+  ws.on("connection", (stream) => {
+    console.log("someone connected!");
+    console.log({ stream });
+  });
+});
+
 app.get("/api/scores", async (req, res) => {
   const { data: clicks, error } = await supabase.from("click").select();
   const totalPointsByTeam = {};

@@ -10,6 +10,7 @@ const apiURL = "http://localhost:8080/api";
 function App() {
   const [scores, setScores] = useState([]);
   const [name, setName] = useState("");
+  const [ws] = useState(new WebSocket("ws://localhost:8080/api/click"));
 
   const secondsInOneWeek = 1000 * 60 * 60 * 24 * 7;
 
@@ -22,7 +23,7 @@ function App() {
   }
 
   function sendClick() {
-    console.log("clicked");
+    ws.send("click");
   }
 
   return (
