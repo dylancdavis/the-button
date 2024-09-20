@@ -1,9 +1,8 @@
 import React, { useState } from "react";
 import "./App.css";
 import "./reset.css";
-import { BigButton, ColorChangingButton } from "./ColorChangingButton";
+import { ColorChangingButton } from "./ColorChangingButton";
 import { Scoreboard } from "./Scoreboard";
-import { hslFromLifePercentage, hslAsCSS } from "./utils";
 
 const apiURL = "http://localhost:8080/api";
 // const apiURL = '/api';
