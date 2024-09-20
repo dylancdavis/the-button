@@ -36,7 +36,7 @@ function App() {
         <div className="input-wrapper">
           <input
             value={name}
-            onChange={(e) => setName(e.target.valuegi)}
+            onChange={(e) => setName(e.target.value)}
             placeholder="What's your name?"
           ></input>
         </div>
