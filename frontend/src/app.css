@@ -19,7 +19,8 @@ code {
   background-color: lightgrey;
   display: grid;
   place-items: center;
-  font-family: 'Roboto'
+  font-family: 'Roboto';
+  text-align: center;
 }
 
 .content {

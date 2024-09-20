@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import "./App.css";
+import "./app.css";
 import "./reset.css";
 import { ColorChangingButton } from "./ColorChangingButton";
 import { Scoreboard } from "./Scoreboard";
