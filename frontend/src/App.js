@@ -14,8 +14,8 @@ function App() {
   const secondsInOneWeek = 1000 * 60 * 60 * 24 * 7;
 
   function getButtonLifePercent() {
-    const mostRecentClick = new Date();
     const now = new Date();
+    const mostRecentClick = new Date();
     const buttonAge = now - mostRecentClick;
     if (buttonAge > secondsInOneWeek) return 1;
     return buttonAge / secondsInOneWeek;
@@ -31,7 +31,7 @@ function App() {
         <h1>The Button</h1>
         <ColorChangingButton
           onClick={sendClick}
-          ageAsPercent={getButtonLifePercent}
+          ageAsPercent={getButtonLifePercent()}
         />
         <div className="input-wrapper">
           <input

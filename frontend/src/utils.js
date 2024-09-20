@@ -2,7 +2,7 @@ import chroma from "chroma-js";
 import ntc from "ntcjs";
 
 export function hslFromLifePercentage(unitInterval) {
-  if (unitInterval > 1 || unitInterval < 0) return;
+  if (unitInterval > 1 || unitInterval < 0) throw new TypeError('Unit interval must be between 0 and 1');
 
   const firstThreshold = 0.7;
   const secondThreshold = 0.8;
