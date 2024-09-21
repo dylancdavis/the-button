@@ -60,8 +60,13 @@ function getMostRecentClick(clicks) {
 }
 
 export function getButtonLifePercent(clicks) {
+  if (!clicks) return 0;
   const mostRecentClickTime = getMostRecentClick(clicks);
   const now = new Date();
+  // throw error when recent click time is in the future
+  if (mostRecentClickTime > now) {
+    throw new Error("Most recent click time is in the future");
+  }
   const buttonAge = now - mostRecentClickTime;
 
   const secondsInOneWeek = 1000 * 60 * 60 * 24 * 7;
