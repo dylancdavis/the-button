@@ -52,7 +52,7 @@ export function calculateScore(ageInSeconds) {
   return Math.floor(0.00273222 * ageInSeconds ** 2 + ageInSeconds);
 }
 
-function getMostRecentClick(clicks) {
+export function getMostRecentClickTime(clicks) {
   if (clicks.length === 0) return BUTTON_BIRTHDAY;
   const clickTimes = clicks.map((click) => new Date(click.clicked));
   clickTimes.sort((a, b) => b - a);
@@ -61,7 +61,7 @@ function getMostRecentClick(clicks) {
 
 export function getButtonLifePercent(clicks) {
   if (!clicks) return 0;
-  const mostRecentClickTime = getMostRecentClick(clicks);
+  const mostRecentClickTime = getMostRecentClickTime(clicks);
   const now = new Date();
   // throw error when recent click time is in the future
   if (mostRecentClickTime > now) {

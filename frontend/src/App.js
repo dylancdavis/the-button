@@ -3,24 +3,28 @@ import "./app.css";
 import "./reset.css";
 import { ColorChangingButton } from "./ColorChangingButton";
 import { Scoreboard } from "./Scoreboard";
-import { getButtonLifePercent, getTeamPointsFromClicks } from "./utils";
+import {
+  calculateScore,
+  getButtonLifePercent,
+  getMostRecentClickTime,
+  getTeamPointsFromClicks,
+} from "./utils";
 
 const apiURL = "ws://localhost:8080/api";
 // const apiURL = '/api';
 
 function App() {
-  const [loading, setLoading] = useState(true);
-  const [clicks, setClicks] = useState([]);
+  const [clicks, setClicks] = useState(null);
   const [team, setTeam] = useState("");
   const [submitting, setSubmitting] = useState(false);
   const [ws, setWs] = useState(null);
+  const [expectedPoints, setExpectedPoints] = useState(0);
 
   useEffect(() => {
     async function setUpWebSocket() {
       const ws = new WebSocket(`${apiURL}/click`);
       ws.onopen = () => {
         console.log("Connected to websocket");
-        setLoading(false);
       };
 
       ws.onmessage = (event) => {
@@ -34,13 +38,26 @@ function App() {
     setUpWebSocket();
   }, []);
 
+  useEffect(() => {
+    if (!clicks || !ws) return;
+    const interval = setInterval(() => {
+      const now = new Date();
+      const mostRecentClickTime = getMostRecentClickTime(clicks);
+      const timeDiff = new Date() - getMostRecentClickTime(clicks);
+      const newPoints = calculateScore(timeDiff / 1000);
+      console.log({ newPoints, now, mostRecentClickTime, timeDiff });
+      setExpectedPoints(newPoints);
+    }, 50);
+    return () => clearInterval(interval);
+  }, [clicks, ws]);
+
   function sendClick() {
     if (!ws || !team) return;
     setSubmitting(true);
     ws.send(team);
   }
 
-  if (loading) return <div>Loading...</div>;
+  if (!clicks) return <div>Loading...</div>;
 
   const scores = getTeamPointsFromClicks(clicks);
 
@@ -53,6 +70,7 @@ function App() {
           ageAsPercent={getButtonLifePercent(clicks)}
           disabled={team === "" || submitting}
         />
+        <div>{expectedPoints} points</div>
         <div className="input-wrapper">
           <input
             value={team}
