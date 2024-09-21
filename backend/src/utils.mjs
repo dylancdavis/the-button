@@ -1,3 +1,3 @@
-export function calculateScore(ageInSeconds) {
-    return 0.00273222 * (ageInSeconds ** 2) + ageInSeconds;
+export function calculatePointsForButtonAge(ageInSeconds) {
+  return Math.floor(0.00273222 * ageInSeconds ** 2 + ageInSeconds);
 }

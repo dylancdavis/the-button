@@ -2,7 +2,7 @@ import express from "express";
 import expressWs from "express-ws";
 import dotenv from "@dotenvx/dotenvx";
 import { createClient } from "@supabase/supabase-js";
-import { calculateScore } from "./utils.mjs";
+import { calculatePointsForButtonAge } from "./utils.mjs";
 
 dotenv.config();
 const app = express();
@@ -16,6 +16,19 @@ const supabase = createClient(supabaseUrl, supabaseKey);
 app.use(express.static("build"));
 app.use(express.json());
 
+async function getButtonAgeInSeconds() {
+  const { data: clicks } = await supabase
+    .from("click")
+    .select()
+    .order("clicked", { ascending: false })
+    .limit(1);
+  console.log("clicks: ", clicks);
+  const lastReset = new Date(clicks[0].clicked);
+  console.log({ lastReset });
+  const myVal = new Date() - lastReset;
+  return (new Date() - lastReset) / 1000;
+}
+
 app.use(function (req, res, next) {
   res.header("Access-Control-Allow-Origin", "*");
   res.header(
@@ -25,65 +38,24 @@ app.use(function (req, res, next) {
   next();
 });
 
-app.get("/api/ping", (req, res) => {
-  res.send("pong");
-});
+app.ws("/api/click", async (ws, req) => {
+  console.log(
+    "Client connected. Number of clients:  ",
+    wsInstance.getWss().clients.size
+  );
+  const { data, error } = await supabase.from("click").select();
+  ws.send(JSON.stringify(data));
 
-app.ws("/api/click", (ws, req) => {
-  console.log("someone connected!");
-  ws.send("connected to websocket");
-
-  console.log("Number of clients: ", wsInstance.getWss().clients.size);
-
-  ws.on("message", (stream) => {
-    console.log("Message received from client: ", stream);
+  ws.on("message", async (team) => {
+    const buttonAge = await getButtonAgeInSeconds();
+    const points = calculatePointsForButtonAge(buttonAge);
+    await supabase.from("click").insert({ team, points });
     const allClients = wsInstance.getWss().clients;
-    // TODO send update and recalculate data
-
     for (const client of allClients) {
-      client.send("Someone else clicked the button!");
+      const { data, error } = await supabase.from("click").select();
+      client.send(JSON.stringify(data));
     }
   });
-});
-
-app.get("/api/scores", async (req, res) => {
-  const { data: clicks, error } = await supabase.from("click").select();
-  const totalPointsByTeam = {};
-  for (const click of clicks) {
-    if (!totalPointsByTeam[click.team]) {
-      totalPointsByTeam[click.team] = click.points;
-    }
-    totalPointsByTeam[click.team] += click.points;
-  }
-  res.json(totalPointsByTeam);
-});
-
-app.get("/api/clicks", async (req, res) => {
-  const { data: clicks, error } = await supabase
-    .from("click")
-    .select()
-    .order("clicked", { ascending: false })
-    .limit(10);
-  res.json(clicks);
-});
-
-app.post("/api/clicks", async (req, res) => {
-  const { team } = req.body;
-  // get most recent click
-  const { data: clicks } = await supabase
-    .from("click")
-    .select()
-    .order("clicked", { ascending: false })
-    .limit(1);
-  const mostRecentClick = clicks[0];
-  now = new Date();
-  const timeSinceLastClick = now - new Date(mostRecentClick.created_at);
-  const timeSinceLastClickInSeconds = timeSinceLastClick / 1000;
-  const points = calculateScore(timeSinceLastClickInSeconds);
-  const { data: newClick } = await supabase
-    .from("click")
-    .insert([{ team, points }]);
-  res.json(newClick);
 });
 
 app.listen(port, () => {

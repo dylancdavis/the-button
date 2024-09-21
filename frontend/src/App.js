@@ -25,7 +25,8 @@ function App() {
 
       ws.onmessage = (event) => {
         console.log("Received message");
-        console.log(event.data);
+        const data = JSON.parse(event.data);
+        setClicks(data);
       };
       setWs(ws);
     }
@@ -43,7 +44,7 @@ function App() {
   }
 
   function sendClick() {
-    ws.send("click");
+    ws.send(name);
   }
 
   if (loading) return <div>Loading...</div>;
@@ -65,6 +66,15 @@ function App() {
         </div>
       </div>
       <Scoreboard scores={scores} totalClicks={0} />
+      <ol>
+        {clicks.map((click, index) => {
+          return (
+            <li key={index}>
+              team: {click.team}, points: {click.points}
+            </li>
+          );
+        })}
+      </ol>
       <div className="app-version">v2.0</div>
     </div>
   );
