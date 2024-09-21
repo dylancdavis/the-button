@@ -2,16 +2,19 @@ import React from "react";
 
 export function Scoreboard({ scores, totalClicks }) {
   if (!scores) return null;
+  const scoresArr = Object.entries(scores);
+  const sortedScores = scoresArr.sort((a, b) => b.points - a.points);
+
   return (
     <div className="scoreboard">
       <h2>Scoreboard</h2>
       <div className="user-list">
-        {scores.map((team, index) => (
+        {sortedScores.map((team, index) => (
           <>
             <div className="user-id">
-              {index + 1}. {team.name}
+              {index + 1}. {team[0]}
             </div>
-            <div>{team.points}</div>
+            <div>{team[1]}</div>
           </>
         ))}
       </div>
