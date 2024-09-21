@@ -43,16 +43,21 @@ app.ws("/api/click", async (ws, req) => {
     "Client connected. Number of clients:  ",
     wsInstance.getWss().clients.size
   );
-  const { data, error } = await supabase.from("click").select();
+
+  const { data, error } = await supabase
+    .from("click")
+    .select()
+    .order("clicked", { ascending: false });
   ws.send(JSON.stringify(data));
 
   ws.on("message", async (team) => {
-    const buttonAge = await getButtonAgeInSeconds();
-    const points = calculatePointsForButtonAge(buttonAge);
-    await supabase.from("click").insert({ team, points });
+    await supabase.from("click").insert({ team });
     const allClients = wsInstance.getWss().clients;
     for (const client of allClients) {
-      const { data, error } = await supabase.from("click").select();
+      const { data, error } = await supabase
+        .from("click")
+        .select()
+        .order("clicked", { ascending: false });
       client.send(JSON.stringify(data));
     }
   });

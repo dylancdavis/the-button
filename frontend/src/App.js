@@ -4,20 +4,21 @@ import "./reset.css";
 import { ColorChangingButton } from "./ColorChangingButton";
 import { Scoreboard } from "./Scoreboard";
 
-const apiURL = "http://localhost:8080/api";
+const apiURL = "ws://localhost:8080/api";
 // const apiURL = '/api';
+
+const buttonBirthday = new Date("2021-09-21");
 
 function App() {
   const [loading, setLoading] = useState(true);
-  const [scores, setScores] = useState([]);
   const [clicks, setClicks] = useState([]);
-  const [button, setButton] = useState({});
-  const [name, setName] = useState("");
+  const [team, setTeam] = useState("");
+  const [submitting, setSubmitting] = useState(false);
   const [ws, setWs] = useState(null);
 
   useEffect(() => {
     async function setUpWebSocket() {
-      const ws = new WebSocket("ws://localhost:8080/api/click");
+      const ws = new WebSocket(`${apiURL}/click`);
       ws.onopen = () => {
         console.log("Connected to websocket");
         setLoading(false);
@@ -27,24 +28,30 @@ function App() {
         console.log("Received message");
         const data = JSON.parse(event.data);
         setClicks(data);
+        setSubmitting(false);
       };
       setWs(ws);
     }
     setUpWebSocket();
   }, []);
 
-  const secondsInOneWeek = 1000 * 60 * 60 * 24 * 7;
-
   function getButtonLifePercent() {
+    const mostRecentClickTime =
+      clicks.length === 0 ? buttonBirthday : new Date(clicks[0].clicked);
     const now = new Date();
-    const mostRecentClick = new Date();
-    const buttonAge = now - mostRecentClick;
-    if (buttonAge > secondsInOneWeek) return 1;
-    return buttonAge / secondsInOneWeek;
+    const buttonAge = now - mostRecentClickTime;
+
+    const secondsInOneWeek = 1000 * 60 * 60 * 24 * 7;
+    const maxButtonAge = secondsInOneWeek;
+
+    if (buttonAge > maxButtonAge) return 1;
+    return buttonAge / maxButtonAge;
   }
 
   function sendClick() {
-    ws.send(name);
+    if (!ws || !team) return;
+    setSubmitting(true);
+    ws.send(team);
   }
 
   if (loading) return <div>Loading...</div>;
@@ -56,21 +63,22 @@ function App() {
         <ColorChangingButton
           onClick={sendClick}
           ageAsPercent={getButtonLifePercent()}
+          disabled={team === "" || submitting}
         />
         <div className="input-wrapper">
           <input
-            value={name}
-            onChange={(e) => setName(e.target.value)}
-            placeholder="What's your name?"
+            value={team}
+            onChange={(e) => setTeam(e.target.value)}
+            placeholder="Enter a team name"
           ></input>
         </div>
       </div>
-      <Scoreboard scores={scores} totalClicks={0} />
+      <Scoreboard scores={[]} totalClicks={0} />
       <ol>
         {clicks.map((click, index) => {
           return (
             <li key={index}>
-              team: {click.team}, points: {click.points}
+              team: {click.team}, clicked: {click.clicked}
             </li>
           );
         })}

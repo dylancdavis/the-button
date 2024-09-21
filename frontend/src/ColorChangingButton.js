@@ -1,7 +1,7 @@
 import React from "react";
 import { hslAsCSS, hslFromLifePercentage } from "./utils";
 
-export function ColorChangingButton({ onClick, ageAsPercent }) {
+export function ColorChangingButton({ onClick, ageAsPercent, disabled }) {
   const backgroundColor = hslAsCSS(hslFromLifePercentage(ageAsPercent));
 
   return (
@@ -10,6 +10,7 @@ export function ColorChangingButton({ onClick, ageAsPercent }) {
         onClick={onClick}
         className="color-circle"
         style={{ backgroundColor }}
+        disabled={disabled}
       ></button>
     </div>
   );
