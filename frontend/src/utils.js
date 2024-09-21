@@ -78,11 +78,11 @@ export function getButtonLifePercent(clicks) {
 
 export function getTeamPointsFromClicks(clicks) {
   const clicksWithTimeDiffs = clicks.map((click, index) => {
-    if (index === 0) {
+    if (index === clicks.length - 1) {
       const timeDiffFromBirthday = new Date(click.clicked) - BUTTON_BIRTHDAY;
       return { ...click, timeDiff: timeDiffFromBirthday };
     }
-    const previousClickTime = clicks[index - 1].clicked;
+    const previousClickTime = clicks[index + 1].clicked;
     const timeDiff = new Date(click.clicked) - new Date(previousClickTime);
     return { ...click, timeDiff };
   });

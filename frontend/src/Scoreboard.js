@@ -3,7 +3,7 @@ import React from "react";
 export function Scoreboard({ scores, totalClicks }) {
   if (!scores) return null;
   const scoresArr = Object.entries(scores);
-  const sortedScores = scoresArr.sort((a, b) => b.points - a.points);
+  const sortedScores = scoresArr.sort((a, b) => b[1] - a[1]);
 
   return (
     <div className="scoreboard">
