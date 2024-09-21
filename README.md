@@ -3,6 +3,7 @@
 
 To run the backend: 
 - `cd backend` 
+- Add SUPABASE_KEY to `.env`
 - `npm install`
 - `npm run start`
 To run the frontend: 
