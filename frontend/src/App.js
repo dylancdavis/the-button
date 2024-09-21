@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import "./app.css";
 import "./reset.css";
 import { ColorChangingButton } from "./ColorChangingButton";
@@ -8,9 +8,29 @@ const apiURL = "http://localhost:8080/api";
 // const apiURL = '/api';
 
 function App() {
+  const [loading, setLoading] = useState(true);
   const [scores, setScores] = useState([]);
+  const [clicks, setClicks] = useState([]);
+  const [button, setButton] = useState({});
   const [name, setName] = useState("");
-  const [ws] = useState(new WebSocket("ws://localhost:8080/api/click"));
+  const [ws, setWs] = useState(null);
+
+  useEffect(() => {
+    async function setUpWebSocket() {
+      const ws = new WebSocket("ws://localhost:8080/api/click");
+      ws.onopen = () => {
+        console.log("Connected to websocket");
+        setLoading(false);
+      };
+
+      ws.onmessage = (event) => {
+        console.log("Received message");
+        console.log(event.data);
+      };
+      setWs(ws);
+    }
+    setUpWebSocket();
+  }, []);
 
   const secondsInOneWeek = 1000 * 60 * 60 * 24 * 7;
 
@@ -25,6 +45,8 @@ function App() {
   function sendClick() {
     ws.send("click");
   }
+
+  if (loading) return <div>Loading...</div>;
 
   return (
     <div className="App">

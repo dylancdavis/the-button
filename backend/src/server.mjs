@@ -6,7 +6,7 @@ import { calculateScore } from "./utils.mjs";
 
 dotenv.config();
 const app = express();
-expressWs(app);
+const wsInstance = expressWs(app);
 const port = process.env.PORT || 8080;
 
 const supabaseUrl = "https://wlgpjikgdvkmemldjqjk.supabase.co";
@@ -30,13 +30,19 @@ app.get("/api/ping", (req, res) => {
 });
 
 app.ws("/api/click", (ws, req) => {
-  ws.on("connection", (stream) => {
-    console.log("someone connected!");
-    console.log({ stream });
-  });
+  console.log("someone connected!");
+  ws.send("connected to websocket");
+
+  console.log("Number of clients: ", wsInstance.getWss().clients.size);
 
   ws.on("message", (stream) => {
-    console.log("message received");
+    console.log("Message received from client: ", stream);
+    const allClients = wsInstance.getWss().clients;
+    // TODO send update and recalculate data
+
+    for (const client of allClients) {
+      client.send("Someone else clicked the button!");
+    }
   });
 });
 
