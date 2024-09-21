@@ -9,12 +9,14 @@ export function Scoreboard({ scores, totalClicks }) {
     <div className="scoreboard">
       <h2>Scoreboard</h2>
       <div className="user-list">
-        {sortedScores.map((team, index) => (
+        {sortedScores.map(([team, points], index) => (
           <>
-            <div className="user-id">
-              {index + 1}. {team[0]}
+            <div className="user-id" style={{ textAlign: "left" }}>
+              {index + 1}. {team}
             </div>
-            <div>{team[1]}</div>
+            <div style={{ textAlign: "right" }}>
+              {new Intl.NumberFormat().format(points)}
+            </div>
           </>
         ))}
       </div>
