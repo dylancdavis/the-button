@@ -90,12 +90,13 @@ export function getTeamPointsFromClicks(clicks) {
     const points = calculateScore(click.timeDiff / 1000);
     return { ...click, points };
   });
-  const teamsWithPoints = clicksWithPoints.reduce((acc, click) => {
-    if (!acc[click.team]) {
-      acc[click.team] = click.points;
+  const teamsWithPoints = clicksWithPoints.reduce((teamPoints, click) => {
+    if (!teamPoints[click.team]) {
+      teamPoints[click.team] = click.points;
+    } else {
+      teamPoints[click.team] += click.points;
     }
-    acc[click.team] += click.points;
-    return acc;
+    return teamPoints;
   }, {});
   return teamsWithPoints;
 }
