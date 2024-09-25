@@ -115,3 +115,5 @@ export function getTeamPointsFromClicks(clicks) {
   }, {});
   return teamsWithPoints;
 }
+
+export const secondsSince = (time) => (new Date() - time) / 1000;

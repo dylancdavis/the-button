@@ -9,6 +9,7 @@ import {
   getMostRecentClickTime,
   getTeamPointsFromClicks,
   buttonLifespan,
+  secondsSince,
 } from "./utils";
 
 const apiURL = "ws://localhost:8080/api";
@@ -42,20 +43,17 @@ function App() {
 
   useEffect(() => {
     if (!clicks || !ws) return;
+    const mostRecentClickTime = getMostRecentClickTime(clicks);
+    const lifespanSecs = buttonLifespan(clicks.length);
     const pointsInterval = setInterval(() => {
-      const now = new Date();
-      const mostRecentClickTime = getMostRecentClickTime(clicks);
-      const timeDiff = new Date() - getMostRecentClickTime(clicks);
-      const newPoints = calculateScore(timeDiff / 1000);
-      console.log({ newPoints, now, mostRecentClickTime, timeDiff });
+      const secondsSinceLastClick = secondsSince(mostRecentClickTime);
+      const newPoints = calculateScore(secondsSinceLastClick);
       setExpectedPoints(newPoints);
     }, 50);
-    const lifespan = buttonLifespan(clicks.length);
     const lifespanInterval = setInterval(() => {
-      const mostRecentClickTime = getMostRecentClickTime(clicks);
-      const timeDiff = new Date() - getMostRecentClickTime(clicks);
-      const timeLeft = lifespan - timeDiff / 1000;
-      setTimeLeft(Math.round(timeLeft));
+      const secondsSinceLastClick = secondsSince(mostRecentClickTime);
+      const timeLeftSecs = lifespanSecs - secondsSinceLastClick;
+      setTimeLeft(Math.round(timeLeftSecs));
     }, 1000);
     return () => {
       clearInterval(pointsInterval);
