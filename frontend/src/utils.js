@@ -117,3 +117,31 @@ export function getTeamPointsFromClicks(clicks) {
 }
 
 export const secondsSince = (time) => (new Date() - time) / 1000;
+
+export function formatDuration(seconds) {
+  if (seconds < 0) {
+    throw new Error("Duration cannot be negative.");
+  }
+
+  const secondsInADay = 86400; // 24 * 60 * 60
+  const secondsInAnHour = 3600; // 60 * 60
+  const secondsInAMinute = 60; // 60
+
+  const days = Math.floor(seconds / secondsInADay);
+  seconds %= secondsInADay;
+  const hours = Math.floor(seconds / secondsInAnHour);
+  seconds %= secondsInAnHour;
+  const minutes = Math.floor(seconds / secondsInAMinute);
+  seconds %= secondsInAMinute;
+
+  const durationParts = [];
+  if (days > 0) durationParts.push(`${days} day${days > 1 ? "s" : ""}`);
+  if (hours > 0) durationParts.push(`${hours} hour${hours > 1 ? "s" : ""}`);
+  if (minutes > 0)
+    durationParts.push(`${minutes} minute${minutes > 1 ? "s" : ""}`);
+  if (seconds > 0 || durationParts.length === 0) {
+    durationParts.push(`${seconds} second${seconds > 1 ? "s" : ""}`);
+  }
+
+  return durationParts.join(", ");
+}

@@ -10,6 +10,7 @@ import {
   getTeamPointsFromClicks,
   buttonLifespan,
   secondsSince,
+  formatDuration,
 } from "./utils";
 
 const apiURL = "ws://localhost:8080/api";
@@ -81,7 +82,7 @@ function App() {
           disabled={team === "" || submitting}
         />
         <div>{expectedPoints} points</div>
-        <div>Time Left: {timeLeft}</div>
+        <div>Time Left: {formatDuration(timeLeft)}</div>
         <div className="input-wrapper">
           <input
             value={team}
