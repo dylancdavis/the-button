@@ -2,7 +2,7 @@ export function calculatePointsForButtonAge(ageInSeconds) {
   return Math.floor(0.00273222 * ageInSeconds ** 2 + ageInSeconds);
 }
 
-export function timeRemaining(numClicks) {
+export function buttonLifespan(numClicks) {
   // startingTime is the lifespan of the button in seconds
   // when zero clicks have occurred.
   // The clicksToReach and decrease factor calibrate what the

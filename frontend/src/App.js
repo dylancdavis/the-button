@@ -8,6 +8,7 @@ import {
   getButtonLifePercent,
   getMostRecentClickTime,
   getTeamPointsFromClicks,
+  buttonLifespan,
 } from "./utils";
 
 const apiURL = "ws://localhost:8080/api";
@@ -19,6 +20,7 @@ function App() {
   const [submitting, setSubmitting] = useState(false);
   const [ws, setWs] = useState(null);
   const [expectedPoints, setExpectedPoints] = useState(0);
+  const [timeLeft, setTimeLeft] = useState(null);
 
   useEffect(() => {
     async function setUpWebSocket() {
@@ -40,7 +42,7 @@ function App() {
 
   useEffect(() => {
     if (!clicks || !ws) return;
-    const interval = setInterval(() => {
+    const pointsInterval = setInterval(() => {
       const now = new Date();
       const mostRecentClickTime = getMostRecentClickTime(clicks);
       const timeDiff = new Date() - getMostRecentClickTime(clicks);
@@ -48,7 +50,17 @@ function App() {
       console.log({ newPoints, now, mostRecentClickTime, timeDiff });
       setExpectedPoints(newPoints);
     }, 50);
-    return () => clearInterval(interval);
+    const lifespan = buttonLifespan(clicks.length);
+    const lifespanInterval = setInterval(() => {
+      const mostRecentClickTime = getMostRecentClickTime(clicks);
+      const timeDiff = new Date() - getMostRecentClickTime(clicks);
+      const timeLeft = lifespan - timeDiff / 1000;
+      setTimeLeft(Math.round(timeLeft));
+    }, 1000);
+    return () => {
+      clearInterval(pointsInterval);
+      clearInterval(lifespanInterval);
+    };
   }, [clicks, ws]);
 
   function sendClick() {
@@ -71,6 +83,7 @@ function App() {
           disabled={team === "" || submitting}
         />
         <div>{expectedPoints} points</div>
+        <div>Time Left: {timeLeft}</div>
         <div className="input-wrapper">
           <input
             value={team}
