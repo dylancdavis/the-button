@@ -14,9 +14,7 @@ export function Scoreboard({ scores, totalClicks }) {
             <div className="user-id" style={{ textAlign: "left" }}>
               {index + 1}. {team}
             </div>
-            <div style={{ textAlign: "right" }}>
-              {new Intl.NumberFormat().format(points)}
-            </div>
+            <div style={{ textAlign: "right" }}>{points.toLocaleString()}</div>
           </>
         ))}
       </div>

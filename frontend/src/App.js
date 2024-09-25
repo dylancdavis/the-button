@@ -81,7 +81,7 @@ function App() {
           ageAsPercent={getButtonLifePercent(clicks)}
           disabled={team === "" || submitting}
         />
-        <div>{expectedPoints} points</div>
+        <div>{expectedPoints.toLocaleString()} points</div>
         <div>Time Left: {formatDuration(timeLeft)}</div>
         <div className="input-wrapper">
           <input
