@@ -46,16 +46,26 @@ function App() {
     if (!clicks || !ws) return;
     const mostRecentClickTime = getMostRecentClickTime(clicks);
     const lifespanSecs = buttonLifespan(clicks.length);
-    const pointsInterval = setInterval(() => {
+
+    function recalculatePoints() {
       const secondsSinceLastClick = secondsSince(mostRecentClickTime);
       const newPoints = calculateScore(secondsSinceLastClick);
       setExpectedPoints(newPoints);
-    }, 50);
-    const lifespanInterval = setInterval(() => {
+    }
+
+    function recalculateLifespan() {
       const secondsSinceLastClick = secondsSince(mostRecentClickTime);
       const timeLeftSecs = lifespanSecs - secondsSinceLastClick;
       setTimeLeft(Math.round(timeLeftSecs));
-    }, 1000);
+    }
+
+    // Run instantly whenever points are changed
+    recalculatePoints();
+    recalculateLifespan();
+
+    // And then update as needed
+    const pointsInterval = setInterval(recalculatePoints, 50);
+    const lifespanInterval = setInterval(recalculateLifespan, 1000);
     return () => {
       clearInterval(pointsInterval);
       clearInterval(lifespanInterval);
