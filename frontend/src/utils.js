@@ -76,19 +76,22 @@ export function getMostRecentClickTime(clicks) {
 
 export function getButtonLifePercent(clicks) {
   if (!clicks) return 0;
-  const mostRecentClickTime = getMostRecentClickTime(clicks);
+
+  let mostRecentClickTime = getMostRecentClickTime(clicks);
   const now = new Date();
-  // throw error when recent click time is in the future
+
   if (mostRecentClickTime > now) {
-    throw new Error("Most recent click time is in the future");
+    console.error("Most recent click time is in the future");
+    // Assume button clicked very recently if click time is in future
+    return 1;
   }
   const buttonAge = now - mostRecentClickTime;
 
   const secondsInOneWeek = 1000 * 60 * 60 * 24 * 7;
-  const maxButtonAge = secondsInOneWeek;
+  const buttonLifespan = secondsInOneWeek;
 
-  if (buttonAge > maxButtonAge) return 1;
-  return buttonAge / maxButtonAge;
+  if (buttonAge > buttonLifespan) return 1;
+  return buttonAge / buttonLifespan;
 }
 
 export function getTeamPointsFromClicks(clicks) {
