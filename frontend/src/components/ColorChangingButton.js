@@ -1,5 +1,5 @@
 import React from "react";
-import { hslAsCSS, hslFromLifePercentage } from "./utils";
+import { hslAsCSS, hslFromLifePercentage } from "../utils";
 
 export function ColorChangingButton({ onClick, ageAsPercent, disabled }) {
   const backgroundColor = hslAsCSS(hslFromLifePercentage(ageAsPercent));

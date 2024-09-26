@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import "./app.css";
 import "./reset.css";
-import { ColorChangingButton } from "./ColorChangingButton";
+import { ColorChangingButton } from "./components/ColorChangingButton";
 import { Scoreboard } from "./Scoreboard";
 import {
   calculateScore,
