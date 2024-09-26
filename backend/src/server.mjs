@@ -3,7 +3,6 @@ import express from "express";
 import expressWs from "express-ws";
 import dotenv from "@dotenvx/dotenvx";
 import { createClient } from "@supabase/supabase-js";
-import { calculatePointsForButtonAge } from "./utils.mjs";
 
 dotenv.config();
 const app = express();
