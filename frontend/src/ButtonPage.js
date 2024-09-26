@@ -11,8 +11,8 @@ import {
   formatDuration,
 } from "./utils";
 
-const apiURL = "ws://localhost:8080/api";
-// const apiURL = '/api';
+// const apiURL = "ws://localhost:8080/api";
+const apiURL = "/api";
 
 function ButtonPage() {
   const [clicks, setClicks] = useState(null);
