@@ -100,8 +100,8 @@ function App() {
             placeholder="Enter a team name"
           ></input>
         </div>
+        <Scoreboard scores={scores} totalClicks={clicks.length} />
       </div>
-      <Scoreboard scores={scores} totalClicks={clicks.length} />
       <div className="app-version">v2.0</div>
     </div>
   );
