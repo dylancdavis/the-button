@@ -1,3 +1,4 @@
+import path from "path";
 import express from "express";
 import expressWs from "express-ws";
 import dotenv from "@dotenvx/dotenvx";
@@ -61,6 +62,11 @@ app.ws("/api/click", async (ws, req) => {
       client.send(JSON.stringify(data));
     }
   });
+});
+
+// Send frontend on all other routes
+app.get("*", (req, res) => {
+  res.sendFile(path.resolve("build", "index.html"));
 });
 
 app.listen(port, () => {
