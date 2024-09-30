@@ -11,8 +11,6 @@ import {
   formatDuration,
 } from "./utils";
 
-const apiURL = "/api";
-
 function ButtonPage() {
   const [clicks, setClicks] = useState(null);
   const [team, setTeam] = useState("");
@@ -23,7 +21,14 @@ function ButtonPage() {
 
   useEffect(() => {
     async function setUpWebSocket() {
-      const ws = new WebSocket(`${apiURL}/click`);
+      const protocol =
+        window.location.protocol === "https:" ? "wss://" : "ws://";
+      const host = window.location.host;
+      const path = "/api";
+
+      const wsUrl = `${protocol}${host}${path}`;
+      const ws = new WebSocket(`${wsUrl}/click`)
+      ;
       ws.onopen = () => {
         console.log("Connected to websocket");
       };
