@@ -83,7 +83,7 @@ export function getButtonLifePercent(clicks) {
   if (mostRecentClickTime > now) {
     console.error("Most recent click time is in the future");
     // Assume button clicked very recently if click time is in future
-    return 1;
+    return 0;
   }
   const buttonAge = now - mostRecentClickTime;
 

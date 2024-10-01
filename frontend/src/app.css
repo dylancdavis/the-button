@@ -196,3 +196,7 @@ code {
   color: #757575;
   text-align: center;
 }
+
+.time-left {
+  color: grey
+}

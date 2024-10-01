@@ -92,8 +92,8 @@ function ButtonPage() {
         ageAsPercent={getButtonLifePercent(clicks)}
         disabled={team === "" || submitting}
       />
-      <div>{expectedPoints.toLocaleString()} points</div>
-      <div>Time Left: {formatDuration(timeLeft)}</div>
+      <div>{Math.max(0, expectedPoints).toLocaleString()} points</div>
+      <div className="time-left">{formatDuration(timeLeft)}</div>
       <div className="input-wrapper">
         <input
           value={team}
