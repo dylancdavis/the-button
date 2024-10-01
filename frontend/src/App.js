@@ -9,15 +9,7 @@ function App() {
     <div className="App">
       <BrowserRouter>
         <Routes>
-          <Route path="/beta" element={<ButtonPage />} />
-          <Route
-            path="*"
-            element={
-              <div className="goodbye-message">
-                the button will return 2024.10.01
-              </div>
-            }
-          />
+          <Route path="*" element={<ButtonPage />} />
         </Routes>
       </BrowserRouter>
       <div className="app-version">v2.0</div>
