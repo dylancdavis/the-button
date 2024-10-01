@@ -1,7 +1,7 @@
 import chroma from "chroma-js";
 import ntc from "ntcjs";
 
-export const BUTTON_BIRTHDAY = new Date("2024-09-26T09:00-04:00");
+export const BUTTON_BIRTHDAY = new Date("2024-10-01T17:00-04:00");
 
 export function hslFromLifePercentage(unitInterval) {
   if (unitInterval > 1 || unitInterval < 0)
