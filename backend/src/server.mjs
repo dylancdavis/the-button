@@ -16,19 +16,6 @@ const supabase = createClient(supabaseUrl, supabaseKey);
 app.use(express.static("build"));
 app.use(express.json());
 
-async function getButtonAgeInSeconds() {
-  const { data: clicks } = await supabase
-    .from("click")
-    .select()
-    .order("clicked", { ascending: false })
-    .limit(1);
-  console.log("clicks: ", clicks);
-  const lastReset = new Date(clicks[0].clicked);
-  console.log({ lastReset });
-  const myVal = new Date() - lastReset;
-  return (new Date() - lastReset) / 1000;
-}
-
 app.use(function (req, res, next) {
   res.header("Access-Control-Allow-Origin", "*");
   res.header(
@@ -44,7 +31,7 @@ app.ws("/api/click", async (ws, req) => {
     wsInstance.getWss().clients.size
   );
 
-  const { data, error } = await supabase
+  const { data } = await supabase
     .from("click")
     .select()
     .order("clicked", { ascending: false });
@@ -54,7 +41,7 @@ app.ws("/api/click", async (ws, req) => {
     await supabase.from("click").insert({ team });
     const allClients = wsInstance.getWss().clients;
     for (const client of allClients) {
-      const { data, error } = await supabase
+      const { data } = await supabase
         .from("click")
         .select()
         .order("clicked", { ascending: false });
@@ -69,5 +56,5 @@ app.get("*", (req, res) => {
 });
 
 app.listen(port, () => {
-  console.log(`Example app listening on port ${port}`);
+  console.log(`Button application listening on port ${port}`);
 });
