@@ -1,4 +1,4 @@
-The button is a simple browser game inspired by Reddit's own [Button](https://en.wikipedia.org/wiki/The_Button_(Reddit)), hosted at [button.quest](https://button.quest). When players press the button, they get points proportional to how long it's been since the button has been pressed.
+A simple multiplayer browser game inspired by Reddit's own [Button](https://en.wikipedia.org/wiki/The_Button_(Reddit)), hosted at [button.quest](https://button.quest). When players press the button, they get points proportional to how long it's been since the button has been pressed.
 
 The application is built on React and Express and uses WebSockets to provide realtime updates on other player's presses. Supabase provides easy access to a PostgreSQL database to store player data, with Fly.IO for easy deployment. While the frontend can be run independently, the backend expects it to be built and stored in a `build/` folder that it can then serve from, and the frontend expects to be able to make API requests to the same server it's hosted from.
 
