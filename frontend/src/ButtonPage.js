@@ -84,6 +84,17 @@ function ButtonPage() {
 
   const scores = getTeamPointsFromClicks(clicks);
 
+  const getLastClicked = () => {
+    if (clicks.length === 0) return "No one has clicked yet";
+    const mostRecentClick = clicks[0];
+    const secondRecentClick = clicks[1];
+    const mostRecentDuration = (new Date(mostRecentClick.clicked) - new Date(secondRecentClick.clicked)) / 1000
+    const recentClickPoints = calculateScore(mostRecentDuration);
+    const secsSinceLastclick = Math.round((new Date() - new Date(mostRecentClick.clicked)) / 1000)
+    const lastClickDurationString = formatDuration(secsSinceLastclick);
+    return `${mostRecentClick.team} clicked ${lastClickDurationString} ago and earned ${recentClickPoints} points`;
+  }
+
   return (
     <div className="content">
       <h1>The Button</h1>
@@ -94,6 +105,7 @@ function ButtonPage() {
       />
       <div>{Math.max(0, expectedPoints).toLocaleString()} points</div>
       <div className="time-left">{formatDuration(timeLeft)}</div>
+      <div className="time-left">{getLastClicked()}</div>
       <div className="input-wrapper">
         <input
           value={team}
