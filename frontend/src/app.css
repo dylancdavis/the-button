@@ -198,5 +198,6 @@ code {
 }
 
 .time-left {
-  color: grey
+  color: grey;
+  padding: 0.5em;
 }

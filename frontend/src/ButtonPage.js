@@ -89,7 +89,7 @@ function ButtonPage() {
     const mostRecentClick = clicks[0];
     const secondRecentClick = clicks[1];
     const mostRecentDuration = (new Date(mostRecentClick.clicked) - new Date(secondRecentClick.clicked)) / 1000
-    const recentClickPoints = calculateScore(mostRecentDuration);
+    const recentClickPoints = calculateScore(mostRecentDuration).toLocaleString();
     const secsSinceLastclick = Math.round((new Date() - new Date(mostRecentClick.clicked)) / 1000)
     const lastClickDurationString = formatDuration(secsSinceLastclick);
     return `${mostRecentClick.team} clicked ${lastClickDurationString} ago and earned ${recentClickPoints} points`;
