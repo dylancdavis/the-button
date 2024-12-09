@@ -12,7 +12,7 @@ function App() {
           <Route path="*" element={<ButtonPage />} />
         </Routes>
       </BrowserRouter>
-      <div className="app-version">v2.1</div>
+      <div className="app-version">v2.2</div>
     </div>
   );
 }
