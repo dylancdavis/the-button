@@ -7,7 +7,7 @@ The application is built on React and Express and uses WebSockets to provide rea
 First, build the frontend:
 - `cd frontend`
 - `npm install`
-- `cd backend`
+- `cd ../backend`
 - `npm run build:ui`
 
 Then, run the backend:
