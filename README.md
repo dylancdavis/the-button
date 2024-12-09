@@ -11,9 +11,12 @@ First, build the frontend:
 - `npm run build:ui`
 
 Then, run the backend:
-- Add SUPABASE_KEY to a `.env` file (if using Supabase)
+- Create the file `backend/.env` (if it does not already exist)
+- Add the database's key as `SUPABASE_KEY=<key>` to `.env`
 - `npm install`
 - `npm run start`
+
+To reload changes, re-run `npm run build:ui` and `npm run start`
 
 #### Deployment
 - Install `flyctl`: `curl -L https://fly.io/install.sh | sh` and follow directions in the prompt
