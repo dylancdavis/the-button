@@ -28,7 +28,7 @@ function ButtonPage() {
 
       const wsUrl = `${protocol}${host}${path}`;
       const ws = new WebSocket(`${wsUrl}/click`)
-      ;
+        ;
       ws.onopen = () => {
         console.log("Connected to websocket");
       };
@@ -93,6 +93,15 @@ function ButtonPage() {
     const secsSinceLastclick = Math.round((new Date() - new Date(mostRecentClick.clicked)) / 1000)
     const lastClickDurationString = formatDuration(secsSinceLastclick);
     return `${mostRecentClick.team} clicked ${lastClickDurationString} ago and earned ${recentClickPoints} points`;
+  }
+
+  if (timeLeft < 0) {
+    return (
+      <div className="content">
+        <h3>The Button has Ended</h3>
+        <h6>Thanks for playing!</h6>
+        <Scoreboard scores={scores} totalClicks={clicks.length} />
+      </div>)
   }
 
   return (

@@ -41,6 +41,12 @@ code {
   padding: 0.25em;;
 }
 
+.content h3 {
+  font-size: 32px;
+  font-weight: bold;
+  padding: 0.25em;
+}
+
 .color-circle-wrapper {
   flex: 1;
   display: grid;
@@ -91,7 +97,7 @@ code {
 }
 
 
-@media (min-width: 992px) {
+/* @media (min-width: 992px) {
   .scoreboard {
     position: absolute;
     top: 1em;
@@ -99,7 +105,7 @@ code {
     border: 2px solid grey;
     box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
   }
-}
+} */
 
 @media (max-width: 450px) {
   .content {
@@ -107,14 +113,14 @@ code {
   }
 }
 
-@media (max-width: 992px) {
+/* @media (max-width: 992px) {
   .scoreboard {
     margin: 1em;
   }
   .content {
     margin: 1em;
   }
-}
+} */
 
 .scoreboard {
   display: flex;

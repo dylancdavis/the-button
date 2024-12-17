@@ -7,7 +7,7 @@ export function Scoreboard({ scores, totalClicks }) {
 
   return (
     <div className="scoreboard">
-      <h2>Scoreboard</h2>
+      <h2>Final Scores</h2>
       <div className="user-list">
         {sortedScores.map(([team, points], index) => (
           <>
